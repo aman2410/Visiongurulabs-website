@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 64" width="260" height="64" role="img" aria-label="Indian Space Research Organisation (ISRO) logo">
+<g transform="translate(4,10)"><circle cx="22" cy="22" r="7" fill="#003D60"/><ellipse cx="22" cy="22" rx="15" ry="6" fill="none" stroke="#CE1F25" stroke-width="2.5" transform="rotate(-25 22 22)"/></g>
+<text x="54" y="30" font-family="Inter, Helvetica, Arial, sans-serif" font-size="19" font-weight="700" letter-spacing="0.5" fill="#003D60">ISRO</text>
+<text x="54" y="47" font-family="Inter, Helvetica, Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="1.4" fill="#64748b">SPACE RESEARCH</text>
+</svg>

@@ -1,0 +1,163 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+@import "@fontsource-variable/inter";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-navy-deep: var(--brand-navy-deep);
+  --color-brand-red: var(--brand-red);
+  --color-brand-orange: var(--brand-orange);
+  --color-brand-sky: var(--brand-sky);
+  --color-ink: var(--ink);
+  --color-slate: var(--slate);
+  --color-muted-ink: var(--muted-ink);
+  --color-paper: var(--paper);
+}
+
+:root {
+  --radius: 0.75rem;
+
+  /* Brand palette */
+  --brand-navy: #003D60;
+  --brand-navy-deep: #002338;
+  --brand-red: #f5945c;
+  --brand-orange: #f5945c;
+  --brand-orange-deep: #e07438;
+  --brand-sky: #0EA5E9;
+  --ink: #0F172A;
+  --slate: #334155;
+  --muted-ink: #64748B;
+  --paper: #F8FAFC;
+
+  /* Semantic tokens */
+  --background: #ffffff;
+  --foreground: #0F172A;
+  --card: #ffffff;
+  --card-foreground: #0F172A;
+  --popover: #ffffff;
+  --popover-foreground: #0F172A;
+  --primary: #003D60;
+  --primary-foreground: #F8FAFC;
+  --secondary: #F1F5F9;
+  --secondary-foreground: #0F172A;
+  --muted: #F1F5F9;
+  --muted-foreground: #64748B;
+  --accent: #E0F2FE;
+  --accent-foreground: #003D60;
+  --destructive: #CE1F25;
+  --destructive-foreground: #F8FAFC;
+  --border: #E2E8F0;
+  --input: #E2E8F0;
+  --ring: #f5945c;
+
+  --gradient-navy: linear-gradient(135deg, #003D60 0%, #002338 100%);
+  --gradient-mesh: radial-gradient(at 20% 20%, rgba(14,165,233,0.15) 0px, transparent 50%),
+                   radial-gradient(at 80% 10%, rgba(245,148,92,0.15) 0px, transparent 50%),
+                   radial-gradient(at 60% 80%, rgba(0,61,96,0.9) 0px, transparent 60%);
+  --shadow-elegant: 0 20px 60px -20px rgba(0,61,96,0.25);
+  --shadow-card: 0 1px 2px rgba(15,23,42,0.04), 0 8px 24px -12px rgba(15,23,42,0.12);
+  --shadow-glow: 0 0 40px rgba(14,165,233,0.35);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility container-x {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  max-width: 1200px;
+  @media (min-width: 768px) {
+    padding-inline: 2rem;
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility surface-dark {
+  background: var(--gradient-navy);
+  color: var(--color-paper);
+}
+
+@utility red-underline {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 2px;
+    background: var(--brand-red);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.35s ease;
+  }
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@utility animate-marquee {
+  animation: marquee 35s linear infinite;
+}
+

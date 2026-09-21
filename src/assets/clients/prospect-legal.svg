@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 64" width="260" height="64" role="img" aria-label="Prospect Legal logo">
+<g transform="translate(4,10)"><path d="M22 9v27M12 36h20M10 17h24" stroke="#003D60" stroke-width="2.5"/><path d="M10 17l-4 8h8zM34 17l-4 8h8z" fill="none" stroke="#CE1F25" stroke-width="2.5"/></g>
+<text x="54" y="30" font-family="Inter, Helvetica, Arial, sans-serif" font-size="19" font-weight="700" letter-spacing="0.5" fill="#003D60">PROSPECT</text>
+<text x="54" y="47" font-family="Inter, Helvetica, Arial, sans-serif" font-size="11" font-weight="500" letter-spacing="1.4" fill="#64748b">LEGAL</text>
+</svg>
