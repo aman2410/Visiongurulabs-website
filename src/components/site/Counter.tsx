@@ -18,5 +18,5 @@ export function Counter({ to, suffix = "", duration = 1.6 }: { to: number; suffi
     return () => controls.stop();
   }, [inView, to, duration, reduce]);
 
-  return <span ref={ref}>{val}{suffix}</span>;
+  return <span ref={ref} className="tabular-numbers inline-block">{val}{suffix}</span>;
 }

@@ -120,11 +120,13 @@ function CaseStudyPage() {
               <span className="inline-flex items-center gap-2"><Users className="h-4 w-4 text-brand-sky" />{c.team}</span>
             </div>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild className="bg-brand-red hover:bg-brand-red/90 text-white font-semibold shadow-sm">
-                <Link to="/contact">Discuss a similar project</Link>
+              <Button asChild size="lg" className="bg-brand-red hover:bg-brand-red/90 text-white font-semibold shadow-sm h-12 px-6 transition-transform active:scale-95">
+                <Link to="/contact">Discuss a similar project <ArrowRight className="ml-1.5 h-4 w-4" /></Link>
               </Button>
-              <Button asChild variant="outline" className="border-paper/30 text-paper hover:bg-paper/10">
-                <Link to="/case-studies">See all case studies</Link>
+              <Button asChild size="lg" variant="glass-dark" className="h-12 px-6 font-semibold">
+                <Link to="/case-studies">
+                  See all case studies <ArrowRight className="ml-1.5 h-4 w-4" />
+                </Link>
               </Button>
             </div>
           </div>

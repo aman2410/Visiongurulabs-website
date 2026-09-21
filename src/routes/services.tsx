@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/site/PageShell";
+import { ServicesGraphic } from "@/components/site/hero-graphics";
 import { services, SITE_URL } from "@/lib/site-data";
 import { CtaBanner } from "@/components/site/sections";
 import { Reveal } from "@/components/site/Reveal";
@@ -56,6 +57,7 @@ function ServicesPage() {
         eyebrow="Services"
         title="Ten disciplines. One senior partner."
         subtitle="From board-level strategy to production engineering, we cover the full arc of building modern software and AI systems."
+        graphic={<ServicesGraphic />}
       />
       <Breadcrumbs crumbs={[{ label: "Home", href: "/" }, { label: "Services" }]} />
       <section className="py-20 lg:py-28">

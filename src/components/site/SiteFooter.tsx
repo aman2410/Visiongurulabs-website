@@ -9,11 +9,17 @@ export function SiteFooter() {
       <div className="container-x py-20">
         <div className="grid gap-12 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2.5 mb-4">
+            <div className="flex items-center gap-3 mb-4">
               <LogoMark className="h-9 w-9" />
-              <span className="text-lg font-extrabold text-white">
-                VisionGuru <span className="text-brand-red">Labs</span>
-              </span>
+              <div className="flex items-center gap-2">
+                <span className="text-xl font-extrabold tracking-tight text-white leading-none">
+                  Vision<span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-amber-300">Guru</span>
+                </span>
+                <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-[5px] text-[9px] font-mono font-bold uppercase tracking-[0.2em] bg-brand-orange/15 text-brand-orange border border-brand-orange/35 shadow-[0_0_12px_rgba(245,148,92,0.2)]">
+                  <span className="h-1 w-1 rounded-full bg-brand-orange animate-pulse" />
+                  LABS
+                </span>
+              </div>
             </div>
             <p className="text-paper/70 text-sm max-w-sm">
               Strategic technology partners for businesses navigating AI, software, and digital transformation.

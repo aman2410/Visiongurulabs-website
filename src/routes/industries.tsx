@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/site/PageShell";
+import { IndustriesGraphic } from "@/components/site/hero-graphics";
 import { industries } from "@/lib/site-data";
 import { CtaBanner } from "@/components/site/sections";
 import { Reveal } from "@/components/site/Reveal";
@@ -41,6 +42,7 @@ function IndustriesPage() {
         eyebrow="Industries"
         title="Domain fluency, not just technical fluency."
         subtitle="We invest in understanding the regulatory, operational, and commercial context of every sector we serve."
+        graphic={<IndustriesGraphic />}
       />
       <Breadcrumbs crumbs={crumbs} />
       <section className="py-20 lg:py-28">

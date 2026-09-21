@@ -25,11 +25,17 @@ export function SiteHeader() {
       className="fixed inset-x-0 top-0 z-50 transition-all duration-300 data-[scrolled=true]:backdrop-blur-xl data-[scrolled=true]:bg-brand-navy/90 data-[scrolled=true]:border-b data-[scrolled=true]:border-white/10"
     >
       <div className="container-x flex h-16 items-center justify-between">
-        <Link to="/" className="flex items-center gap-2.5 text-paper group">
+        <Link to="/" className="flex items-center gap-3 text-paper group">
           <LogoMark />
-          <span className="text-base font-extrabold tracking-tight group-hover:text-white transition-colors">
-            VisionGuru <span className="text-brand-red">Labs</span>
-          </span>
+          <div className="flex items-center gap-2">
+            <span className="text-[18px] font-extrabold tracking-tight text-white leading-none">
+              Vision<span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-amber-300">Guru</span>
+            </span>
+            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-[5px] text-[9px] font-mono font-bold uppercase tracking-[0.2em] bg-brand-orange/15 text-brand-orange border border-brand-orange/35 shadow-[0_0_12px_rgba(245,148,92,0.2)]">
+              <span className="h-1 w-1 rounded-full bg-brand-orange animate-pulse" />
+              LABS
+            </span>
+          </div>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-8">
@@ -85,9 +91,11 @@ export function SiteHeader() {
 
 export function LogoMark({ className = "h-9 w-9" }: { className?: string }) {
   return (
-    <span className={`relative inline-flex items-center justify-center ${className} rounded-xl bg-white shadow-xs p-1 border border-white/20 shrink-0`}>
+    <span
+      className={`relative inline-flex items-center justify-center ${className} rounded-xl bg-white shadow-[0_2px_10px_rgba(0,0,0,0.25),0_0_15px_rgba(245,148,92,0.2)] ring-1 ring-white/50 p-1 shrink-0 group-hover:ring-brand-orange/60 group-hover:shadow-[0_0_20px_rgba(245,148,92,0.4)] group-hover:scale-105 transition-all duration-300`}
+    >
       <img
-        src="/logo-transparent.png"
+        src="/logo-tight.png"
         alt="VisionGuru Labs Logo"
         className="h-full w-full object-contain"
         width={36}

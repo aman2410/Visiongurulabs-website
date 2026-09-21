@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageShell, PageHero } from "@/components/site/PageShell";
+import { ContactGraphic } from "@/components/site/hero-graphics";
 import { Reveal } from "@/components/site/Reveal";
 import { Button } from "@/components/ui/button";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
@@ -43,6 +44,7 @@ function ContactPage() {
         eyebrow="Contact"
         title="Talk to a Guru."
         subtitle="Tell us about your goals. We'll respond within one business day."
+        graphic={<ContactGraphic />}
       />
       <Breadcrumbs crumbs={crumbs} />
       <section className="py-20 lg:py-28">

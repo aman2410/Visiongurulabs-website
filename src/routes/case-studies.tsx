@@ -2,7 +2,9 @@ import { useMemo } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { PageShell, PageHero } from "@/components/site/PageShell";
+import { CaseStudiesGraphic } from "@/components/site/hero-graphics";
 import { Breadcrumbs, breadcrumbJsonLd } from "@/components/site/Breadcrumbs";
+import { CaseStudyCard } from "@/components/site/CaseStudyCard";
 import { CtaBanner } from "@/components/site/sections";
 import { Reveal } from "@/components/site/Reveal";
 import { Button } from "@/components/ui/button";
@@ -112,6 +114,7 @@ function CaseStudiesPage() {
         eyebrow="Case Studies"
         title="Systems that shipped. Outcomes that stuck."
         subtitle="Full engagement write-ups: the problem, the architecture, and the numbers that moved."
+        graphic={<CaseStudiesGraphic />}
       />
       <Breadcrumbs crumbs={crumbs} />
 
@@ -158,49 +161,7 @@ function CaseStudiesPage() {
             <div className="mt-8 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {visible.map((c, i) => (
                 <Reveal key={c.slug} delay={i * 0.05}>
-                  <article className="group h-full flex flex-col overflow-hidden rounded-3xl border border-border bg-background hover:shadow-[var(--shadow-elegant)] transition-shadow">
-                    <Link
-                      to="/case-studies/$slug"
-                      params={{ slug: c.slug }}
-                      className="block aspect-[16/10] overflow-hidden bg-brand-navy/5"
-                    >
-                      <img
-                        src={c.heroImage.src}
-                        alt={c.heroImage.alt}
-                        loading="lazy"
-                        decoding="async"
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                    </Link>
-                    <div className="flex flex-1 flex-col p-6">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-red">{c.industry}</span>
-                      </div>
-                      <h2 className="mt-3 text-xl font-extrabold text-ink leading-snug">
-                        <Link to="/case-studies/$slug" params={{ slug: c.slug }} className="hover:text-brand-navy transition-colors">
-                          {c.title}
-                        </Link>
-                      </h2>
-                      <p className="mt-2 text-sm text-slate">{c.summary}</p>
-                      <div className="mt-4 flex flex-wrap gap-1.5">
-                        {c.services.slice(0, 3).map((s) => (
-                          <span key={s} className="rounded-full bg-brand-navy/5 px-2.5 py-1 text-[11px] text-brand-navy">{s}</span>
-                        ))}
-                      </div>
-                      <div className="mt-5 rounded-xl bg-brand-navy/[0.04] px-4 py-3">
-                        <div className="text-xs uppercase tracking-wide text-muted-ink">Key outcome</div>
-                        <div className="mt-0.5 font-bold text-brand-navy">{c.primaryOutcome}</div>
-                      </div>
-                      <Link
-                        to="/case-studies/$slug"
-                        params={{ slug: c.slug }}
-                        className="mt-auto pt-6 inline-flex items-center gap-2 text-sm font-bold text-brand-navy"
-                      >
-                        View Case Study
-                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                      </Link>
-                    </div>
-                  </article>
+                  <CaseStudyCard caseStudy={c} />
                 </Reveal>
               ))}
             </div>

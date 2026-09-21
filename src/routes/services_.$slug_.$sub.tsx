@@ -123,12 +123,12 @@ function SubServicePage() {
           <h1 className="mt-4 text-4xl md:text-5xl text-paper text-balance">{subService.title}</h1>
           <p className="mt-6 text-lg text-paper/70 max-w-2xl text-balance">{subService.description}</p>
           <div className="mt-10 flex flex-wrap gap-4">
-            <Button asChild size="lg" className="bg-brand-red hover:bg-brand-red/90 text-white font-semibold shadow-sm">
+            <Button asChild size="lg" className="bg-brand-red hover:bg-brand-red/90 text-white font-semibold shadow-sm h-12 px-6 transition-transform active:scale-95">
               <Link to="/contact">
                 <MessageSquare className="h-4 w-4" /> Discuss a project
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-paper/30 bg-transparent text-paper hover:bg-paper hover:text-brand-navy">
+            <Button asChild size="lg" variant="glass-dark" className="h-12 px-6 font-semibold">
               <Link to="/services/$slug" params={{ slug: detail.slug }}>
                 See all {parentTitle} <ArrowRight className="h-4 w-4" />
               </Link>

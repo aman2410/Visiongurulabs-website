@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/site/PageShell";
+import { AboutGraphic } from "@/components/site/hero-graphics";
 import { TeamGrid, CtaBanner } from "@/components/site/sections";
 import { Reveal } from "@/components/site/Reveal";
 import { stats } from "@/lib/site-data";
@@ -42,6 +43,7 @@ function AboutPage() {
         eyebrow="About"
         title="Vision. Guru. Labs."
         subtitle="Three ideas that shape how we work: see what's coming, guide with expertise, and engineer solutions that ship."
+        graphic={<AboutGraphic />}
       />
       <Breadcrumbs crumbs={crumbs} />
       <section className="py-20 lg:py-28">

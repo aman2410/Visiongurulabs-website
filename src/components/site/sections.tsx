@@ -1,23 +1,31 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Check, X, Quote, ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
+import {
+  ArrowRight, Check, X, Quote, ChevronLeft, ChevronRight, Sparkles,
+  Play, Pause, Zap, ShieldCheck, Cpu, Bot, MessageSquare, Network,
+  Layers, ArrowUpRight, Filter,
+} from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "./Reveal";
 import { Counter } from "./Counter";
 import { HeroFlow } from "./HeroFlow";
+import { CaseStudyCard } from "./CaseStudyCard";
 import {
-  services, industries, processSteps, caseStudies, aiCapabilities, team,
+  services, industries, processSteps, aiCapabilities, team,
   insights, testimonials, stats, comparison, getInsightImage,
 } from "@/lib/site-data";
+import { allCaseStudies } from "@/lib/case-studies-data";
 import { clientLogos } from "@/lib/client-logos";
 import heroBg from "@/assets/hero-network.jpg";
 import aiBg from "@/assets/ai-backdrop.jpg";
 
 export function ClientsStrip() {
+  const [isPaused, setIsPaused] = useState(false);
+
   const row = (dup: boolean) => (
     <div
-      className="flex shrink-0 animate-marquee items-center gap-12 pr-12"
+      className={`flex shrink-0 animate-marquee items-center gap-12 pr-12 ${isPaused ? "marquee-paused" : ""}`}
       aria-hidden={dup || undefined}
     >
       {clientLogos.map((client) => (
@@ -37,19 +45,27 @@ export function ClientsStrip() {
 
   return (
     <section className="py-12 border-y border-border bg-paper overflow-hidden">
-      <div className="container-x mb-6">
+      <div className="container-x mb-6 flex items-center justify-between gap-4">
         <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-ink">
-          Trusted by visionary teams
+          Trusted by visionary teams across Defense, Enterprise & High-Growth Startups
         </span>
+        <button
+          type="button"
+          onClick={() => setIsPaused((prev) => !prev)}
+          className="inline-flex items-center gap-1.5 rounded-full border border-border/80 bg-background/90 px-3 py-1 text-xs font-medium text-slate hover:bg-background hover:text-ink transition-colors shadow-2xs cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-navy"
+          aria-label={isPaused ? "Resume client logo carousel" : "Pause client logo carousel"}
+        >
+          {isPaused ? <Play className="h-3 w-3 text-brand-red" /> : <Pause className="h-3 w-3 text-brand-navy" />}
+          <span>{isPaused ? "Play" : "Pause"}</span>
+        </button>
       </div>
-      <div className="relative flex overflow-hidden">
+      <div className="marquee-container relative flex overflow-hidden">
         {row(false)}
         {row(true)}
       </div>
     </section>
   );
 }
-
 
 export function Hero() {
   return (
@@ -86,12 +102,45 @@ export function Hero() {
             </Reveal>
             <Reveal delay={0.3}>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Button asChild size="lg" className="bg-brand-red hover:bg-brand-red/90 text-white font-semibold border-0 h-12 px-6 shadow-sm">
+                <Button asChild size="lg" className="bg-brand-red hover:bg-brand-red/90 text-white font-semibold border-0 h-12 px-6 shadow-sm transition-transform active:scale-95 hover:scale-[1.02]">
                   <Link to="/contact">Talk to a Guru <ArrowRight className="ml-1 h-4 w-4" /></Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="h-12 px-6 border-white/25 bg-white/5 text-paper hover:bg-white/10 hover:text-paper">
-                  <Link to="/case-studies">View our work</Link>
+                <Button asChild size="lg" variant="glass-dark" className="h-12 px-6 font-semibold transition-transform active:scale-95 hover:scale-[1.02]">
+                  <Link to="/case-studies">View our work <ArrowRight className="ml-1.5 h-4 w-4" /></Link>
                 </Button>
+              </div>
+
+              {/* UI/UX Pro Max Heuristic: Executive Value Proof Strip */}
+              <div className="mt-10 pt-6 border-t border-white/15 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="h-9 w-9 rounded-xl bg-white/10 flex items-center justify-center shrink-0 border border-white/10 text-brand-sky shadow-inner">
+                    <Zap className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-paper">0 Ramp-Up Tax</div>
+                    <div className="text-[11px] text-paper/60">Day-1 velocity execution</div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <div className="h-9 w-9 rounded-xl bg-white/10 flex items-center justify-center shrink-0 border border-white/10 text-brand-red shadow-inner">
+                    <ShieldCheck className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-paper">100% Senior Bench</div>
+                    <div className="text-[11px] text-paper/60">Only veteran practitioners</div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <div className="h-9 w-9 rounded-xl bg-white/10 flex items-center justify-center shrink-0 border border-white/10 text-emerald-400 shadow-inner">
+                    <Cpu className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-paper">Production in 90 Days</div>
+                    <div className="text-[11px] text-paper/60">From roadmap to scale</div>
+                  </div>
+                </div>
               </div>
             </Reveal>
           </div>
@@ -103,6 +152,7 @@ export function Hero() {
     </section>
   );
 }
+
 
 export function TrustBar() {
   return (
@@ -171,28 +221,195 @@ export function ServicesGrid() {
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <Link to="/services" className="text-brand-navy font-semibold red-underline">All services →</Link>
+            <Link to="/services" className="text-brand-navy font-semibold red-underline inline-flex items-center gap-1.5">
+              <span>View all 10 services</span>
+              <ArrowRight className="h-4 w-4" />
+            </Link>
           </Reveal>
         </div>
+
+        {/* UI/UX Pro Max: Apple-Style Asymmetric Bento Box Grid */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((s, i) => {
-            const Icon = s.icon;
-            return (
-              <Reveal key={s.slug} delay={i * 0.04}>
-                <div className="group h-full rounded-2xl border border-border bg-background p-7 shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-elegant)]">
-                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand-navy/5 text-brand-navy group-hover:bg-brand-navy group-hover:text-paper transition-colors">
-                    <Icon className="h-5 w-5" />
+          {/* Bento Featured Hero Card: AI Solutions & Autonomous Systems (Spans 2 cols) */}
+          <div className="md:col-span-2 lg:col-span-2">
+            <Reveal delay={0.04}>
+              <div className="bento-glow group h-full rounded-3xl border border-border/80 bg-background p-8 sm:p-10 shadow-[var(--shadow-card)] hover:shadow-xl transition-all duration-300 flex flex-col justify-between hover:-translate-y-1">
+                <div>
+                  <div className="flex items-center justify-between gap-4 flex-wrap mb-6">
+                    <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-navy text-paper shadow-sm">
+                      <Cpu className="h-6 w-6 text-brand-sky" />
+                    </div>
+                    <span className="inline-flex items-center gap-2 rounded-full border border-brand-red/25 bg-brand-red/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-brand-red">
+                      <span className="h-2 w-2 rounded-full bg-brand-red animate-pulse" />
+                      Flagship Practice
+                    </span>
                   </div>
-                  <h3 className="mt-5 text-lg font-extrabold text-ink">{s.title}</h3>
-                  <p className="mt-2 text-sm text-slate leading-relaxed">{s.description}</p>
-                  <Link to="/services" className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-brand-navy">
-                    Learn more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Link>
+
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight">
+                    AI Solutions & Autonomous Systems
+                  </h3>
+                  <p className="mt-3 text-slate text-base leading-relaxed max-w-2xl">
+                    Strategy, model adaptation, and production deployment of AI that directly drives business metrics. From multi-agent orchestration and domain-tuned RAG pipelines to enterprise-grade evaluation and guardrails.
+                  </p>
+
+                  {/* Visual Architecture Flow Chip Strip */}
+                  <div className="mt-6 p-4 rounded-2xl bg-paper border border-border/70">
+                    <div className="text-[11px] font-bold uppercase tracking-wider text-muted-ink mb-2">Production AI Pipeline Architecture</div>
+                    <div className="flex items-center gap-2 flex-wrap text-xs font-semibold text-slate">
+                      <span className="px-2.5 py-1 rounded-lg bg-white border border-border shadow-2xs">Data & Docs</span>
+                      <span className="text-brand-sky">→</span>
+                      <span className="px-2.5 py-1 rounded-lg bg-white border border-border shadow-2xs">Vector & Hybrid RAG</span>
+                      <span className="text-brand-sky">→</span>
+                      <span className="px-2.5 py-1 rounded-lg bg-white border border-border shadow-2xs">Agentic Tool-Calling</span>
+                      <span className="text-brand-sky">→</span>
+                      <span className="px-2.5 py-1 rounded-lg bg-brand-navy text-white shadow-2xs">Live Guardrails</span>
+                    </div>
+                  </div>
+
+                  {/* Capability Chips */}
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {["Autonomous Agents", "Enterprise RAG", "Fine-Tuning", "Computer Vision", "Guardrails & Eval"].map((tag) => (
+                      <span key={tag} className="text-xs font-medium rounded-full bg-brand-navy/5 text-brand-navy px-3 py-1 border border-brand-navy/10">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </Reveal>
-            );
-          })}
+
+                <div className="mt-8 pt-6 border-t border-border/60 flex items-center justify-between">
+                  <Link to="/services/ai-consulting" className="inline-flex items-center gap-2 text-sm font-bold text-brand-navy hover:text-brand-red transition-colors">
+                    Explore AI Practice <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                  <span className="text-xs text-muted-ink font-medium">SOC2 & Enterprise Ready</span>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Bento Card 2: Custom Software Engineering */}
+          <div className="lg:col-span-1">
+            <Reveal delay={0.08}>
+              <div className="bento-glow group h-full rounded-3xl border border-border/80 bg-background p-8 shadow-[var(--shadow-card)] hover:shadow-xl transition-all duration-300 flex flex-col justify-between hover:-translate-y-1">
+                <div>
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-navy/5 text-brand-navy group-hover:bg-brand-navy group-hover:text-paper transition-colors mb-5">
+                    <Layers className="h-6 w-6" />
+                  </div>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-brand-sky block mb-1">Core Engineering</span>
+                  <h3 className="text-xl font-extrabold text-ink">Custom Software Development</h3>
+                  <p className="mt-2 text-sm text-slate leading-relaxed">
+                    Bespoke systems engineered around your mission-critical operations — from high-throughput internal platforms to distributed APIs.
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-1.5">
+                    {["Distributed Systems", "Event-Driven", "Zero-Downtime"].map((t) => (
+                      <span key={t} className="text-[11px] font-medium rounded-md bg-slate-100 text-slate-700 px-2 py-0.5">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <Link to="/services/custom-software" className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-navy group-hover:text-brand-red transition-colors">
+                  Learn more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Bento Card 3: SaaS Product Development */}
+          <div className="lg:col-span-1">
+            <Reveal delay={0.12}>
+              <div className="bento-glow group h-full rounded-3xl border border-border/80 bg-background p-8 shadow-[var(--shadow-card)] hover:shadow-xl transition-all duration-300 flex flex-col justify-between hover:-translate-y-1">
+                <div>
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-navy/5 text-brand-navy group-hover:bg-brand-navy group-hover:text-paper transition-colors mb-5">
+                    <Sparkles className="h-6 w-6" />
+                  </div>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-brand-red block mb-1">0-to-1 Product</span>
+                  <h3 className="text-xl font-extrabold text-ink">SaaS Product Development</h3>
+                  <p className="mt-2 text-sm text-slate leading-relaxed">
+                    End-to-end product builds — scalable multi-tenant architecture, intuitive UX, resilient billing, and frictionless onboarding.
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-1.5">
+                    {["Multi-Tenant", "Stripe / Auth", "Rapid MVP"].map((t) => (
+                      <span key={t} className="text-[11px] font-medium rounded-md bg-slate-100 text-slate-700 px-2 py-0.5">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <Link to="/services/saas" className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-navy group-hover:text-brand-red transition-colors">
+                  Learn more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Bento Card 4: Digital Transformation & Cloud */}
+          <div className="lg:col-span-1">
+            <Reveal delay={0.16}>
+              <div className="bento-glow group h-full rounded-3xl border border-border/80 bg-background p-8 shadow-[var(--shadow-card)] hover:shadow-xl transition-all duration-300 flex flex-col justify-between hover:-translate-y-1">
+                <div>
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-navy/5 text-brand-navy group-hover:bg-brand-navy group-hover:text-paper transition-colors mb-5">
+                    <Zap className="h-6 w-6" />
+                  </div>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-600 block mb-1">Modernization</span>
+                  <h3 className="text-xl font-extrabold text-ink">Digital Transformation</h3>
+                  <p className="mt-2 text-sm text-slate leading-relaxed">
+                    Senior advisory and engineering to modernize legacy stacks, migrate to cloud-native platforms, and eliminate technical debt.
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-1.5">
+                    {["Cloud-Native", "Legacy Refactor", "FinOps"].map((t) => (
+                      <span key={t} className="text-[11px] font-medium rounded-md bg-slate-100 text-slate-700 px-2 py-0.5">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <Link to="/services/transformation" className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-navy group-hover:text-brand-red transition-colors">
+                  Learn more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Bento Card 5: Staff Augmentation & Dedicated Pods */}
+          <div className="lg:col-span-1">
+            <Reveal delay={0.20}>
+              <div className="bento-glow group h-full rounded-3xl border border-border/80 bg-background p-8 shadow-[var(--shadow-card)] hover:shadow-xl transition-all duration-300 flex flex-col justify-between hover:-translate-y-1">
+                <div>
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-navy/5 text-brand-navy group-hover:bg-brand-navy group-hover:text-paper transition-colors mb-5">
+                    <ShieldCheck className="h-6 w-6" />
+                  </div>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-brand-navy block mb-1">Senior Bench</span>
+                  <h3 className="text-xl font-extrabold text-ink">Staff Augmentation & Pods</h3>
+                  <p className="mt-2 text-sm text-slate leading-relaxed">
+                    Senior software engineers, AI researchers, and solution architects embedded into your sprints with zero onboarding friction.
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-1.5">
+                    {["Zero Ramp-Up", "Embedded Pods", "Senior ICs"].map((t) => (
+                      <span key={t} className="text-[11px] font-medium rounded-md bg-slate-100 text-slate-700 px-2 py-0.5">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <Link to="/services/staff-aug" className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-navy group-hover:text-brand-red transition-colors">
+                  Learn more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </div>
+            </Reveal>
+          </div>
         </div>
+
+        {/* Footer info bar for remaining capabilities */}
+        <Reveal delay={0.25}>
+          <div className="mt-10 p-6 rounded-2xl bg-background border border-border/70 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-slate text-center sm:text-left">
+              Also providing <span className="font-semibold text-ink">IT Manpower Services</span>, <span className="font-semibold text-ink">Executive Technical Search</span>, and <span className="font-semibold text-ink">24/7 Mission-Critical SLA Support</span>.
+            </p>
+            <Button asChild variant="outline" size="sm" className="rounded-xl shrink-0 font-semibold border-border hover:border-brand-navy text-brand-navy">
+              <Link to="/services">Explore full catalog →</Link>
+            </Button>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -268,64 +485,66 @@ export function IndustriesGrid() {
 
 export function WhyUs() {
   return (
-    <section id="why-us" className="relative py-24 lg:py-32 bg-paper overflow-hidden">
-      {/* Dynamic ambient radial lighting to draw immediate attention */}
-      <div
-        className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] max-w-full h-[450px] bg-gradient-to-tr from-brand-sky/20 via-brand-navy/15 to-brand-red/10 blur-3xl -z-10"
-        aria-hidden="true"
-      />
-
+    <section id="why-us" className="relative py-24 lg:py-32 bg-paper border-b border-border/40 overflow-hidden">
       <div className="container-x relative">
         <Reveal>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-[0.2em] bg-brand-red/10 text-brand-red border border-brand-red/25 mb-4 shadow-xs">
-            Why VisionGuru
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-[0.18em] bg-brand-orange/10 text-brand-orange border border-brand-orange/20 mb-4">
+            <span className="h-1.5 w-1.5 rounded-full bg-brand-orange" />
+            Comparative Benchmark
           </div>
-          <h2 className="text-3xl md:text-5xl text-ink font-bold tracking-tight text-balance max-w-3xl leading-tight">
+          <h2 className="text-3xl md:text-5xl text-ink font-bold tracking-tight text-balance max-w-3xl leading-[1.15]">
             Not another agency.{" "}
-            <span className="bg-gradient-to-r from-brand-navy via-brand-sky to-brand-navy bg-clip-text text-transparent">
-              A partner engineered for outcomes.
-            </span>
+            <span className="text-brand-navy">A partner engineered for outcomes.</span>
           </h2>
-          <p className="mt-4 text-slate text-base md:text-lg max-w-2xl">
+          <p className="mt-4 text-slate text-base md:text-lg max-w-2xl leading-relaxed">
             See how our outcome-first engineering model compares directly with conventional agencies.
           </p>
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="mt-12 overflow-hidden rounded-2xl border-2 border-slate-200/90 bg-background shadow-[0_25px_60px_-15px_rgba(0,61,96,0.18)]">
-            <div className="overflow-x-auto">
-              <div className="min-w-[660px]">
-                {/* 3 Columns Header Bar */}
-                <div className="grid grid-cols-[1.1fr_1.3fr_1.5fr] border-b border-border items-stretch">
+          <div className="mt-8 mb-3 flex items-center justify-between text-xs text-muted-ink lg:hidden">
+            <span className="inline-flex items-center gap-1 font-medium">
+              <span>← Swipe horizontally to compare →</span>
+            </span>
+            <span className="font-semibold text-brand-navy">Outcome Model</span>
+          </div>
+
+          <div className="overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-[0_4px_24px_-4px_rgba(0,0,0,0.06),0_1px_2px_rgba(0,0,0,0.04)]">
+            <div className="overflow-x-auto relative">
+              <div className="min-w-[680px]">
+                {/* 3 Columns Header Bar with Balanced Vertical Rhythm */}
+                <div className="grid grid-cols-[1.1fr_1.3fr_1.5fr] border-b border-slate-200/80 items-stretch bg-slate-50/60">
                   {/* Column 1: Dimension */}
-                  <div className="p-6 bg-slate-50/90 flex flex-col justify-end">
-                    <span className="text-[11px] font-bold uppercase tracking-widest text-muted-ink">Comparison</span>
-                    <span className="text-base font-extrabold text-slate-800 mt-1">Dimension</span>
+                  <div className="p-6 md:p-7 flex flex-col justify-between">
+                    <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-slate-400">
+                      01 // Evaluation Matrix
+                    </span>
+                    <span className="text-base md:text-lg font-bold text-slate-800 tracking-tight mt-4">
+                      Core Dimension
+                    </span>
                   </div>
 
                   {/* Column 2: Traditional Agencies */}
-                  <div className="p-6 bg-slate-50/40 border-l border-border flex flex-col justify-end">
-                    <span className="text-[11px] font-bold uppercase tracking-widest text-slate-400">The Conventional Way</span>
-                    <span className="text-base font-bold text-slate-600 mt-1">Traditional Agencies</span>
+                  <div className="p-6 md:p-7 border-l border-slate-200/70 flex flex-col justify-between bg-slate-50/30">
+                    <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-slate-400">
+                      Industry Baseline
+                    </span>
+                    <span className="text-base md:text-lg font-bold text-slate-600 tracking-tight mt-4">
+                      Traditional Agencies
+                    </span>
                   </div>
 
-                  {/* Column 3: VisionGuru Labs - High-End Monolithic Hero Header */}
-                  <div className="p-6 bg-brand-navy-deep text-white border-l border-brand-navy-deep relative overflow-hidden flex flex-col justify-between shadow-2xl">
-                    {/* Glowing top accent border - pure warm radiant amber-orange */}
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-red/30 via-brand-red to-amber-300/40" />
-                    {/* Ambient subtle light sweep */}
-                    <div
-                      className="absolute -right-8 -top-8 w-32 h-32 bg-brand-red/25 rounded-full blur-xl pointer-events-none"
-                      aria-hidden="true"
-                    />
-                    <div className="relative flex items-center justify-between gap-2 mb-3">
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-brand-red text-white shadow-xs">
-                        <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
-                        Engineered Model
+                  {/* Column 3: VisionGuru Labs - Sophisticated Warm Architectural Highlight */}
+                  <div className="p-6 md:p-7 bg-brand-orange/[0.06] border-l-2 border-brand-orange/70 relative flex flex-col justify-between">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest bg-brand-orange text-white shadow-xs">
+                        The Outcome Standard
                       </span>
-                      <span className="text-[11px] font-medium text-white/75 tracking-wide">Our Standard</span>
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-brand-orange font-semibold">
+                        ROI Engineered
+                      </span>
                     </div>
-                    <span className="relative text-lg md:text-xl font-extrabold text-white tracking-tight">
+                    <span className="text-base md:text-lg font-extrabold text-brand-navy-deep tracking-tight mt-4">
                       VisionGuru Labs
                     </span>
                   </div>
@@ -336,29 +555,42 @@ export function WhyUs() {
                   <div
                     key={row.dimension}
                     className={`group grid grid-cols-[1.1fr_1.3fr_1.5fr] items-stretch ${
-                      i > 0 ? "border-t border-border" : ""
+                      i > 0 ? "border-t border-slate-100" : ""
                     }`}
                   >
-                    {/* Dimension Value */}
-                    <div className="p-5 md:p-6 font-semibold text-ink text-sm sm:text-base flex items-center bg-white group-hover:bg-slate-50/90 transition-colors">
-                      {row.dimension}
+                    {/* Dimension Value with Swiss Index */}
+                    <div className="p-5 md:p-6 text-sm sm:text-base flex items-center gap-3 bg-white group-hover:bg-slate-50/70 transition-colors">
+                      <span className="text-xs font-mono text-slate-400 font-medium select-none">0{i + 1}</span>
+                      <span className="font-semibold text-slate-900">{row.dimension}</span>
                     </div>
 
-                    {/* Traditional Agency Value */}
-                    <div className="p-5 md:p-6 text-slate-500 border-l border-border bg-slate-50/40 group-hover:bg-slate-100/60 text-sm sm:text-base flex items-center gap-3 transition-colors">
-                      <X className="h-4 w-4 shrink-0 text-slate-400 stroke-[2]" />
+                    {/* Traditional Agency Value - Refined, Honest Baseline */}
+                    <div className="p-5 md:p-6 border-l border-slate-100 bg-slate-50/20 group-hover:bg-slate-50/60 text-sm sm:text-base flex items-center gap-3 transition-colors">
+                      <span className="text-slate-400 text-sm select-none font-mono">—</span>
                       <span className="font-normal text-slate-600">{row.agency}</span>
                     </div>
 
-                    {/* VisionGuru Labs Value - Monolithic Deep Navy Cell */}
-                    <div className="p-5 md:p-6 bg-brand-navy-deep group-hover:bg-[#002f4a] text-white border-l border-brand-navy-deep/80 text-sm sm:text-base flex items-center gap-3 border-t border-white/5 relative transition-colors">
-                      <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-brand-red/20 text-brand-red border border-brand-red/30 shadow-xs">
-                        <Check className="h-3.5 w-3.5 stroke-[2.5]" />
-                      </div>
-                      <span className="font-bold text-white tracking-tight">{row.us}</span>
+                    {/* VisionGuru Labs Value - Warm Elevated Architectural Cell */}
+                    <div className="p-5 md:p-6 bg-brand-orange/[0.035] group-hover:bg-brand-orange/[0.06] border-l-2 border-brand-orange/70 text-sm sm:text-base flex items-center gap-3 transition-colors">
+                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-orange text-white shadow-xs">
+                        <Check className="h-3 w-3 stroke-[2.5]" />
+                      </span>
+                      <span className="font-bold text-brand-navy-deep tracking-tight">{row.us}</span>
                     </div>
                   </div>
                 ))}
+
+                {/* Executive Benchmark Summary Footer */}
+                <div className="p-4 sm:p-5 bg-slate-50/90 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+                  <div className="flex items-center gap-2">
+                    <ShieldCheck className="h-4 w-4 text-brand-orange shrink-0" />
+                    <span className="font-semibold text-slate-700">The VisionGuru Standard:</span>
+                    <span>Direct senior engineering access · Outcome-guaranteed delivery milestones</span>
+                  </div>
+                  <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400">
+                    Engineered for Tangible ROI
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -369,6 +601,8 @@ export function WhyUs() {
 }
 
 export function CaseStudiesPreview() {
+  const featured = allCaseStudies.slice(0, 3);
+
   return (
     <section className="py-24 lg:py-32">
       <div className="container-x">
@@ -385,33 +619,10 @@ export function CaseStudiesPreview() {
             <Link to="/case-studies" className="text-brand-navy font-semibold red-underline">See all →</Link>
           </Reveal>
         </div>
-        <div className="grid gap-6 lg:grid-cols-3">
-          {caseStudies.map((c, i) => (
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {featured.map((c, i) => (
             <Reveal key={c.slug} delay={i * 0.08}>
-              <article className="h-full flex flex-col rounded-2xl border border-border bg-background overflow-hidden hover:shadow-[var(--shadow-elegant)] transition-shadow">
-                <div className="h-40 bg-gradient-to-br from-brand-navy via-brand-navy-deep to-ink relative">
-                  <div className="absolute inset-0" style={{ background: "var(--gradient-mesh)", opacity: 0.6 }} />
-                  <span className="absolute top-4 left-4 text-xs font-semibold uppercase tracking-wider text-brand-sky">{c.industry}</span>
-                  <span className="absolute bottom-4 left-4 text-paper font-extrabold text-lg">{c.client}</span>
-                </div>
-                <div className="p-6 flex-1 flex flex-col">
-                  <p className="text-sm text-slate"><span className="font-semibold text-ink">Problem: </span>{c.problem}</p>
-                  <p className="mt-3 text-sm text-slate"><span className="font-semibold text-ink">Solution: </span>{c.solution}</p>
-                  <div className="mt-5 grid grid-cols-3 gap-3">
-                    {c.metrics.map((m) => (
-                      <div key={m.label} className="rounded-lg bg-paper p-3">
-                        <div className="text-lg font-extrabold text-brand-navy">{m.value}</div>
-                        <div className="text-[10px] uppercase tracking-wide text-muted-ink leading-tight mt-1">{m.label}</div>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-5 flex flex-wrap gap-1.5">
-                    {c.stack.map((t) => (
-                      <span key={t} className="text-[11px] rounded-full bg-brand-navy/5 text-brand-navy px-2 py-0.5">{t}</span>
-                    ))}
-                  </div>
-                </div>
-              </article>
+              <CaseStudyCard caseStudy={c} />
             </Reveal>
           ))}
         </div>
@@ -427,68 +638,305 @@ export function AISection() {
       <div className="absolute inset-0 bg-gradient-to-b from-brand-navy-deep/80 via-brand-navy/60 to-brand-navy-deep" />
       <div className="container-x relative">
         <Reveal>
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-sky">Artificial Intelligence</span>
-          <h2 className="mt-4 text-3xl md:text-5xl text-paper text-balance max-w-2xl">
-            Your guide to the AI era.
+          <div className="inline-flex items-center gap-2 rounded-full border border-brand-sky/30 bg-brand-sky/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-brand-sky mb-4">
+            <Sparkles className="h-3.5 w-3.5" />
+            Next-Gen AI Systems
+          </div>
+          <h2 className="text-3xl md:text-5xl text-paper text-balance max-w-3xl">
+            Moving AI from demo theater to <span className="text-brand-sky">enterprise production</span>.
           </h2>
-          <p className="mt-4 text-paper/70 max-w-2xl">
-            We move AI from demo to production — with the governance, evaluation, and engineering rigor that enterprise deployments demand.
+          <p className="mt-4 text-paper/70 max-w-2xl text-base md:text-lg">
+            We engineer autonomous multi-agent systems, high-accuracy RAG architectures, and fine-tuned models with the governance and auditability that enterprise scale demands.
           </p>
         </Reveal>
-        <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {aiCapabilities.map((cap, i) => {
-            const Icon = cap.icon;
-            return (
-              <Reveal key={cap.title} delay={i * 0.05}>
-                <div className="h-full rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md p-6 hover:bg-white/[0.06] transition-colors">
-                  <Icon className="h-6 w-6 text-brand-sky" />
-                  <h3 className="mt-4 text-lg font-extrabold text-paper">{cap.title}</h3>
-                  <p className="mt-2 text-sm text-paper/70">{cap.body}</p>
+
+        {/* UI/UX Pro Max: AI-Native Bento Showcase */}
+        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {/* Bento Featured Card: Autonomous Multi-Agent Workflows (Spans 2 cols) */}
+          <div className="md:col-span-2 lg:col-span-2">
+            <Reveal delay={0.05}>
+              <div className="bento-glow-dark group h-full rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-md p-8 sm:p-10 hover:bg-white/[0.07] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between gap-4 flex-wrap mb-6">
+                    <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-sky/15 text-brand-sky border border-brand-sky/30 shadow-inner">
+                      <Bot className="h-6 w-6" />
+                    </div>
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-emerald-400">
+                      <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                      Agentic Systems
+                    </span>
+                  </div>
+
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-paper tracking-tight">
+                    Autonomous Multi-Agent Orchestration
+                  </h3>
+                  <p className="mt-3 text-paper/75 text-base leading-relaxed max-w-2xl">
+                    Autonomous agentic workflows that break down complex objectives, formulate execution plans, execute targeted API/database tool calls, and self-correct with human oversight.
+                  </p>
+
+                  {/* Visual Agent Loop Strip */}
+                  <div className="mt-6 p-4 rounded-2xl bg-white/[0.03] border border-white/10">
+                    <div className="text-[11px] font-bold uppercase tracking-wider text-brand-sky/80 mb-2">Agent Execution Lifecycle</div>
+                    <div className="flex items-center gap-2 flex-wrap text-xs font-medium text-paper/90">
+                      <span className="px-2.5 py-1 rounded-lg bg-white/10 border border-white/10">Task Decomposition</span>
+                      <span className="text-brand-sky">→</span>
+                      <span className="px-2.5 py-1 rounded-lg bg-white/10 border border-white/10">Tool Selection</span>
+                      <span className="text-brand-sky">→</span>
+                      <span className="px-2.5 py-1 rounded-lg bg-white/10 border border-white/10">Sandbox Evaluation</span>
+                      <span className="text-brand-sky">→</span>
+                      <span className="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Verified Execution</span>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {["ReAct Framework", "State Persistence", "Tool-Calling APIs", "Human-in-the-Loop", "Guardrails"].map((tag) => (
+                      <span key={tag} className="text-xs font-medium rounded-full bg-white/5 text-paper/90 px-3 py-1 border border-white/10">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </Reveal>
-            );
-          })}
+
+                <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between">
+                  <Link to="/services/ai-consulting" className="inline-flex items-center gap-2 text-sm font-bold text-brand-sky hover:text-white transition-colors">
+                    Explore Agentic Frameworks <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                  <span className="text-xs text-paper/50">Zero Latency Overhead</span>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Bento Card 2: Production RAG & Semantic Retrieval */}
+          <div className="lg:col-span-1">
+            <Reveal delay={0.1}>
+              <div className="bento-glow-dark group h-full rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-md p-8 hover:bg-white/[0.07] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
+                <div>
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-brand-sky border border-white/10 mb-5">
+                    <Network className="h-6 w-6" />
+                  </div>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-brand-sky block mb-1">Knowledge Systems</span>
+                  <h3 className="text-xl font-extrabold text-paper">Enterprise RAG & Hybrid Search</h3>
+                  <p className="mt-2 text-sm text-paper/70 leading-relaxed">
+                    Hybrid dense vector + sparse BM25 retrieval, automated chunking, cross-encoder reranking, and citation-grounded outputs with zero hallucinations.
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-1.5">
+                    {["Hybrid Search", "Vector Embeddings", "Zero Hallucination"].map((t) => (
+                      <span key={t} className="text-[11px] font-medium rounded-md bg-white/5 text-paper/80 border border-white/10 px-2 py-0.5">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <Link to="/services/ai-consulting" className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-sky hover:text-white transition-colors">
+                  Learn more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Bento Card 3: Custom Fine-Tuning */}
+          <div className="lg:col-span-1">
+            <Reveal delay={0.15}>
+              <div className="bento-glow-dark group h-full rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-md p-8 hover:bg-white/[0.07] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
+                <div>
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-brand-sky border border-white/10 mb-5">
+                    <Cpu className="h-6 w-6" />
+                  </div>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-amber-400 block mb-1">Proprietary Models</span>
+                  <h3 className="text-xl font-extrabold text-paper">Model Tuning & Distillation</h3>
+                  <p className="mt-2 text-sm text-paper/70 leading-relaxed">
+                    Domain adaptation of open-weights models (Llama, Mistral, Qwen) using parameter-efficient LoRA/QLoRA for specialized business reasoning.
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-1.5">
+                    {["LoRA / QLoRA", "Private On-Prem", "Data Privacy"].map((t) => (
+                      <span key={t} className="text-[11px] font-medium rounded-md bg-white/5 text-paper/80 border border-white/10 px-2 py-0.5">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <Link to="/services/ai-consulting" className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-sky hover:text-white transition-colors">
+                  Learn more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Bento Card 4: Enterprise Copilots */}
+          <div className="lg:col-span-1">
+            <Reveal delay={0.2}>
+              <div className="bento-glow-dark group h-full rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-md p-8 hover:bg-white/[0.07] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
+                <div>
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-brand-sky border border-white/10 mb-5">
+                    <MessageSquare className="h-6 w-6" />
+                  </div>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-brand-sky block mb-1">Conversational</span>
+                  <h3 className="text-xl font-extrabold text-paper">Enterprise Copilots & Chat</h3>
+                  <p className="mt-2 text-sm text-paper/70 leading-relaxed">
+                    Domain-tuned conversational assistants integrated with ERP, CRM, databases, and collaboration apps with rigorous audit trails.
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-1.5">
+                    {["ERP / CRM Sync", "Role-Based Access", "Omnichannel"].map((t) => (
+                      <span key={t} className="text-[11px] font-medium rounded-md bg-white/5 text-paper/80 border border-white/10 px-2 py-0.5">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <Link to="/services/ai-consulting" className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-sky hover:text-white transition-colors">
+                  Learn more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Bento Card 5: Intelligent Process Automation */}
+          <div className="lg:col-span-1">
+            <Reveal delay={0.25}>
+              <div className="bento-glow-dark group h-full rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-md p-8 hover:bg-white/[0.07] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
+                <div>
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-brand-sky border border-white/10 mb-5">
+                    <Zap className="h-6 w-6" />
+                  </div>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-400 block mb-1">Operations</span>
+                  <h3 className="text-xl font-extrabold text-paper">Intelligent Process Automation</h3>
+                  <p className="mt-2 text-sm text-paper/70 leading-relaxed">
+                    Multimodal document processing, automated exception handling, and straight-through routing that eliminates repetitive manual tasks.
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-1.5">
+                    {["Document OCR", "Straight-Through", "80% Time Saved"].map((t) => (
+                      <span key={t} className="text-[11px] font-medium rounded-md bg-white/5 text-paper/80 border border-white/10 px-2 py-0.5">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <Link to="/services/ai-consulting" className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-sky hover:text-white transition-colors">
+                  Learn more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
+const memberDomains: Record<string, { category: string; tags: string[] }> = {
+  "A. Menon": {
+    category: "Product & Strategy",
+    tags: ["Product Strategy", "0-to-1 Roadmaps", "UX Architecture"],
+  },
+  "R. Iyer": {
+    category: "Engineering & Architecture",
+    tags: ["Distributed Systems", "Cloud-Native", "Zero-Downtime"],
+  },
+  "S. Kapoor": {
+    category: "AI & Machine Learning",
+    tags: ["LLM Tuning", "Autonomous Agents", "Enterprise RAG"],
+  },
+  "L. Fernandes": {
+    category: "Product & Strategy",
+    tags: ["GTM Engineering", "B2B Expansion", "Enterprise ROI"],
+  },
+};
+
 export function TeamGrid() {
+  const [activeCategory, setActiveCategory] = useState("All");
+
+  const categories = ["All", "AI & Machine Learning", "Engineering & Architecture", "Product & Strategy"];
+
+  const filteredTeam = team.filter((m) => {
+    if (activeCategory === "All") return true;
+    return memberDomains[m.name]?.category === activeCategory;
+  });
+
   return (
     <section id="team-section" className="py-24 lg:py-32">
       <div className="container-x">
-        <Reveal>
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-red">Team</span>
-          <h2 className="mt-4 text-3xl md:text-5xl text-ink text-balance">Meet the Gurus.</h2>
-          <p className="mt-4 text-slate max-w-2xl">A senior bench of product, engineering, AI, and growth operators.</p>
-        </Reveal>
+        <div className="flex items-end justify-between gap-6 flex-wrap">
+          <Reveal>
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-red">Team</span>
+            <h2 className="mt-4 text-3xl md:text-5xl text-ink text-balance">Meet the Gurus.</h2>
+            <p className="mt-4 text-slate max-w-2xl text-base md:text-lg">A senior bench of product, engineering, AI, and growth operators.</p>
+          </Reveal>
+
+          {/* Interactive Category Filter Pills */}
+          <Reveal delay={0.1}>
+            <div className="flex items-center gap-2 flex-wrap" role="tablist" aria-label="Team domain filters">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  role="tab"
+                  aria-selected={activeCategory === cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                    activeCategory === cat
+                      ? "bg-brand-navy text-white shadow-xs"
+                      : "bg-paper text-slate hover:bg-slate-200/70 border border-border/80"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {team.map((m, i) => (
-            <Reveal key={m.name} delay={i * 0.06}>
-              <div className="group rounded-2xl border border-border bg-background overflow-hidden hover:shadow-[var(--shadow-elegant)] hover:border-brand-navy/30 transition-all duration-300 flex flex-col h-full">
-                <div className="aspect-[4/5] relative overflow-hidden bg-slate-900">
-                  <img
-                    src={m.image}
-                    alt={`${m.name} — ${m.role}`}
-                    style={{ objectPosition: m.imagePosition || "center 20%" }}
-                    className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-75 group-hover:opacity-60 transition-opacity" />
-                  <span className="absolute top-4 left-4 text-[11px] font-bold uppercase tracking-wider bg-white/95 text-brand-navy shadow-sm backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
-                    {m.role}
-                  </span>
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <div className="text-2xl font-extrabold text-white tracking-tight">{m.name}</div>
+          <AnimatePresence mode="popLayout">
+            {filteredTeam.map((m, i) => {
+              const meta = memberDomains[m.name];
+              return (
+                <motion.div
+                  key={m.name}
+                  layout
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
+                  className="h-full"
+                >
+                  <div className="bento-glow group rounded-3xl border border-border/80 bg-background overflow-hidden hover:shadow-xl hover:border-brand-navy/30 transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
+                    <div className="aspect-[4/5] relative overflow-hidden bg-slate-900">
+                      <img
+                        src={m.image}
+                        alt={`${m.name} — ${m.role}`}
+                        style={{ objectPosition: m.imagePosition || "center 20%" }}
+                        className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent opacity-80 group-hover:opacity-65 transition-opacity" />
+                      <span className="absolute top-4 left-4 text-[11px] font-bold uppercase tracking-wider bg-white/95 text-brand-navy shadow-sm backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
+                        {m.role}
+                      </span>
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <div className="text-2xl font-extrabold text-white tracking-tight">{m.name}</div>
+                      </div>
+                    </div>
+                    <div className="p-6 flex-1 flex flex-col justify-between">
+                      <p className="text-sm text-slate leading-relaxed">{m.bio}</p>
+
+                      {meta && (
+                        <div className="mt-5 pt-4 border-t border-border/70">
+                          <div className="text-[10px] font-bold uppercase tracking-wider text-muted-ink mb-2">Key Specializations</div>
+                          <div className="flex flex-wrap gap-1.5">
+                            {meta.tags.map((tag) => (
+                              <span key={tag} className="text-[10px] font-semibold rounded-md bg-brand-navy/5 text-brand-navy px-2 py-0.5 border border-brand-navy/10">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
-                <div className="p-6 flex-1 flex flex-col justify-between">
-                  <p className="text-sm text-slate leading-relaxed">{m.bio}</p>
-                </div>
-              </div>
-            </Reveal>
-          ))}
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
         </div>
       </div>
     </section>
@@ -627,21 +1075,34 @@ export function TestimonialsCarousel() {
         </div>
 
         <div className="mt-8 flex items-center justify-center gap-4">
-          <button aria-label="Previous testimonial" onClick={() => go(-1)} className="h-11 w-11 rounded-full border border-border hover:bg-paper flex items-center justify-center">
-            <ChevronLeft className="h-4 w-4" />
+          <button
+            type="button"
+            aria-label="Previous testimonial"
+            onClick={() => go(-1)}
+            className="h-11 w-11 rounded-full border border-border bg-background hover:bg-paper flex items-center justify-center cursor-pointer transition-colors active:scale-95 focus:outline-none focus:ring-2 focus:ring-brand-navy shadow-2xs"
+          >
+            <ChevronLeft className="h-5 w-5 text-slate-700" />
           </button>
-          <div className="flex gap-2">
+          <div className="flex items-center gap-2">
             {testimonials.map((_, idx) => (
               <button
                 key={idx}
+                type="button"
                 aria-label={`Go to testimonial ${idx + 1}`}
                 onClick={() => setI(idx)}
-                className={`h-1.5 rounded-full transition-all ${idx === i ? "w-8 bg-brand-red" : "w-4 bg-border"}`}
-              />
+                className="py-3 px-1 cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-navy rounded-full"
+              >
+                <span className={`block h-1.5 rounded-full transition-all duration-300 ${idx === i ? "w-8 bg-brand-red" : "w-4 bg-slate-300 hover:bg-slate-400"}`} />
+              </button>
             ))}
           </div>
-          <button aria-label="Next testimonial" onClick={() => go(1)} className="h-11 w-11 rounded-full border border-border hover:bg-paper flex items-center justify-center">
-            <ChevronRight className="h-4 w-4" />
+          <button
+            type="button"
+            aria-label="Next testimonial"
+            onClick={() => go(1)}
+            className="h-11 w-11 rounded-full border border-border bg-background hover:bg-paper flex items-center justify-center cursor-pointer transition-colors active:scale-95 focus:outline-none focus:ring-2 focus:ring-brand-navy shadow-2xs"
+          >
+            <ChevronRight className="h-5 w-5 text-slate-700" />
           </button>
         </div>
       </div>
@@ -667,8 +1128,8 @@ export function CtaBanner() {
               <Button asChild size="lg" className="bg-brand-red hover:bg-brand-red/90 text-white font-semibold border-0 h-12 px-6 shadow-md">
                 <Link to="/contact">Book a discovery call <ArrowRight className="ml-1 h-4 w-4" /></Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="h-12 px-6 border-white/25 bg-white/5 text-paper hover:bg-white/10 hover:text-paper">
-                <Link to="/contact">Contact us</Link>
+              <Button asChild size="lg" variant="glass-dark" className="h-12 px-6 font-semibold transition-transform active:scale-95">
+                <Link to="/contact">Contact us <ArrowRight className="ml-1.5 h-4 w-4" /></Link>
               </Button>
             </div>
           </div>

@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { useMemo, useState } from "react";
 import { PageShell, PageHero } from "@/components/site/PageShell";
+import { InsightsGraphic } from "@/components/site/hero-graphics";
 import { insights, getInsightImage } from "@/lib/site-data";
 import { CtaBanner } from "@/components/site/sections";
 import { Reveal } from "@/components/site/Reveal";
@@ -67,6 +68,7 @@ function InsightsPage() {
         eyebrow="Insights"
         title="Writing from the frontlines."
         subtitle="Perspectives on AI, software engineering, product, and the operating models that make technology stick."
+        graphic={<InsightsGraphic />}
       />
       <Breadcrumbs crumbs={crumbs} />
       <section className="py-20 lg:py-28">

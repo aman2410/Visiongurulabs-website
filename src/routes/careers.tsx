@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageShell, PageHero } from "@/components/site/PageShell";
+import { CareersGraphic } from "@/components/site/hero-graphics";
 import { CtaBanner } from "@/components/site/sections";
 import { Reveal } from "@/components/site/Reveal";
 import { ArrowRight, MapPin } from "lucide-react";
@@ -56,6 +57,7 @@ function CareersPage() {
         eyebrow="Careers"
         title="Work with a senior bench, on work that matters."
         subtitle="We hire operators who have shipped, not resumes that describe shipping."
+        graphic={<CareersGraphic />}
       />
       <Breadcrumbs crumbs={crumbs} />
 
