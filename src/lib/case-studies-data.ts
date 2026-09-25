@@ -7,6 +7,14 @@ import harborShot2 from "@/assets/case-studies/harbor-shot-2.jpg";
 import meridianHero from "@/assets/case-studies/meridian-hero.jpg";
 import meridianShot1 from "@/assets/case-studies/meridian-shot-1.jpg";
 import meridianShot2 from "@/assets/case-studies/meridian-shot-2.jpg";
+import indianArmyLmsHero from "@/assets/case-studies/indian-army-lms-hero.jpg";
+import indianArmyLmsArch from "@/assets/case-studies/indian-army-lms-arch.jpg";
+import moilBillingHero from "@/assets/case-studies/moil-billing-hero.jpg";
+import moilCghsArch from "@/assets/case-studies/moil-cghs-arch.jpg";
+import isroDigefabHero from "@/assets/case-studies/isro-digefab-hero.jpg";
+import isroDigefabArch from "@/assets/case-studies/isro-digefab-arch.jpg";
+import drdoUwmHero from "@/assets/case-studies/drdo-uwm-hero.jpg";
+import drdoUwmArch from "@/assets/case-studies/drdo-uwm-arch.jpg";
 
 export type CaseImage = { src: string; alt: string; caption?: string };
 
@@ -62,6 +70,619 @@ const baseApproach: ApproachStep[] = [
 ];
 
 export const caseStudies: CaseStudy[] = [
+  {
+    slug: "indian-army-lms",
+    client: "Indian Army Related Organization",
+    title: "Mission-Critical LMS & Institutional Training Management System",
+    industry: "Defense & Sovereign Institutions",
+    services: ["Enterprise Architecture", "Custom Software", "Cloud & On-Prem Infrastructure"],
+    serviceLinks: ["custom-software", "cloud-devops", "transformation"],
+    technologies: ["React", "TypeScript", "Node.js", "PostgreSQL", "Hierarchical RBAC", "Air-Gapped Infrastructure", "Docker"],
+    summary: "Enterprise-grade Learning Management System (LMS) managing training, personnel, courses, batches, examinations, and administrative reporting in a structured military environment.",
+    duration: "Phased Multi-Release Deployment",
+    team: "6 — Principal Systems Architect, 3 Full-Stack Engineers, 1 UX/Systems Designer, 1 QA/Security Lead",
+    primaryOutcome: "Modular, zero-rewrite architecture adaptable to evolving military command protocols",
+    heroImage: {
+      src: indianArmyLmsHero,
+      alt: "Institutional military Learning Management System dashboard showing training batches, assessments, and personnel records",
+    },
+    problem: "Structured institutional military training required strict hierarchical approvals, examination integrity, and personnel tracking across slow-evolving command confirmations.",
+    solution: "Delivered an enterprise institutional LMS with modular data models, multi-tier RBAC, document management vaults, and extensible batch workflows.",
+    stack: ["React", "TypeScript", "Node.js", "PostgreSQL", "Air-Gapped RBAC"],
+    metrics: [
+      { label: "Administrative Roles", value: "Multi-Tier" },
+      { label: "Course Batches", value: "Unified" },
+      { label: "System Auditing", value: "100% Traceable" },
+    ],
+    challenge: {
+      context:
+        "We are developing an enterprise-grade Learning Management System (LMS) for an Indian Army-related institutional organization to manage training, learning, personnel, courses, assessments, documentation, and reporting in a structured institutional environment.",
+      problem:
+        "The system operates under multi-role administrative hierarchies where confirmations and requirements from the client side evolve incrementally over extended timelines. Traditional rigid LMS platforms fail when schemas or institutional protocols shift, risking costly system rewrites.",
+      problemPoints: [
+        "Complex military user hierarchies requiring fine-grained, role-based access control (RBAC)",
+        "Disparate tracking across personnel records, course batches, exam schedules, and completion certificates",
+        "Strict defense security, auditability, data integrity, and air-gapped on-premise operational mandates",
+        "Slow, incremental requirement iterations from institutional stakeholders requiring flexible, rewrite-proof architecture",
+      ],
+      whyItMattered:
+        "Institutional training readiness is mission-critical. Disjointed records or brittle software delay curriculum rollout, compromise assessment integrity, and impede administrative oversight.",
+    },
+    objectives: [
+      "Support multi-tier user and personnel management with granular Role-Based Access Control (RBAC)",
+      "Orchestrate course catalogs, training batches, enrollment, and attendance tracking",
+      "Implement a secure learning material and document management repository",
+      "Deliver examination engines supporting tests, marks/results, and official completion certificates",
+      "Engineer a modular, highly adaptable architecture that accommodates evolving client specifications without rewrites",
+      "Provide executive dashboards, administrative approvals, search/filtering, and verifiable audit logging",
+    ],
+    approach: [
+      { number: "01", title: "Institutional Workflow Mapping", body: "Detailed field analysis mapping military user hierarchies, training commands, cadet progressions, and administrative signoff chains." },
+      { number: "02", title: "Modular Domain Architecture", body: "Architecting decoupled domain services (Personnel, Courses, Batches, Exams, Approvals) so data models and UI screens can evolve without rewrites." },
+      { number: "03", title: "Hierarchical RBAC & Security", body: "Enforcing fine-grained role-based permissions and immutable audit logging meeting air-gapped defense standards." },
+      { number: "04", title: "Incremental Feature Releases", body: "Two-week release cycles providing functional software modules for stakeholder review, adapting iteratively to command feedback." },
+      { number: "05", title: "Examination & Assessment Vault", body: "Building secure question banks, automated grading engines, attendance logs, and verifiable digital certificate generators." },
+      { number: "06", title: "Air-Gapped Sovereign Deployment", body: "Deploying on self-hosted, air-gapped local infrastructure with local databases, zero external internet dependencies, and hardened Docker runtimes." },
+      { number: "07", title: "Handover & Protocol Expansion", body: "Delivering operational documentation, administrator tooling, and modular hooks for future institutional training modules." },
+    ],
+    solutionSections: [
+      {
+        title: "Hierarchical Role-Based Access & Personnel Management",
+        body: "Engineered a military-grade administrative hierarchy supporting granular permissions from commanding officers to instructional staff and trainees. Every action, approval, and record mutation is immutably logged for institutional auditability.",
+        bullets: [
+          "Multi-tier RBAC aligned with military administrative chains of command",
+          "Comprehensive personnel service profiles and training history tracking",
+          "Automated enrollment into assigned training batches and courses",
+        ],
+      },
+      {
+        title: "End-to-End Course, Batch & Examination Lifecycle",
+        body: "Orchestrates the entire institutional education pipeline—from curriculum document vaults and batch schedules to exam proctoring, marks tabulations, and official completion records.",
+        bullets: [
+          "Dynamic question banks with randomized assessments and automated evaluation",
+          "Daily attendance logging, session participation, and performance trend analytics",
+          "Tamper-proof digital certificates and administrative signoff workflows",
+        ],
+      },
+      {
+        title: "Modular, Evolution-Resilient Architecture",
+        body: "Because institutional requirements evolve incrementally over time, the system features a domain-driven modular design. Workflows, schemas, and UI views can be extended without breaking existing modules or requiring large-scale rewrites.",
+        bullets: [
+          "Pluggable service modules for courses, assessments, and approvals",
+          "Decoupled data models that absorb schema refinements cleanly",
+          "Full data export, multi-criteria filtering, and sovereign on-premise execution",
+        ],
+      },
+    ],
+    images: [
+      { src: indianArmyLmsHero, alt: "Indian Army Institutional LMS Training Command Dashboard", caption: "Training Command Personnel & Batch Management Dashboard" },
+      { src: indianArmyLmsArch, alt: "Institutional military LMS 5-tier modular architecture diagram", caption: "Modular 5-tier domain architecture resilient to protocol changes" },
+    ],
+    architecture: [
+      { label: "Frontend", items: ["React 18", "TypeScript", "Tailwind CSS", "Modular UI Components", "Offline-Ready Cache"] },
+      { label: "Backend", items: ["Node.js", "Express", "Domain-Driven Service Layer", "Hierarchical RBAC Engine"] },
+      { label: "Database", items: ["PostgreSQL", "Role-Based Schemas", "Immutable Audit Logging", "Encrypted Vaults"] },
+      { label: "Infrastructure", items: ["Air-Gapped On-Premise Servers", "Docker Containerization", "Zero-Internet Sovereign Network"] },
+      { label: "Compliance", items: ["Military Audit Standards", "Role Separation", "Tamper-Evident Logs"] },
+    ],
+    results: [
+      { value: 100, suffix: "%", label: "Immutable audit log coverage across all actions" },
+      { value: 0, label: "Large-scale rewrites during evolving protocol updates" },
+      { value: 10, prefix: "+", label: "Administrative user roles and hierarchical tiers" },
+    ],
+    beforeAfter: {
+      before: [
+        "Disjointed paper and spreadsheet records across training commands",
+        "Rigid legacy software requiring complete rewrites when protocols changed",
+        "Manual calculation of examination results and delayed certification",
+        "Limited audit trail for administrative approvals and personnel movements",
+      ],
+      after: [
+        "Unified institutional LMS managing personnel, batches, courses, and marks",
+        "Modular architecture that absorbs requirement updates without code rewrites",
+        "Automated grading, instant performance records, and verifiable certificates",
+        "Complete, tamper-evident audit logging for every command action",
+      ],
+    },
+    businessImpact: [
+      {
+        title: "Operational Training Readiness",
+        body: "Centralizes training records across battalions, enabling command leadership to evaluate operational readiness and course completion rates instantly.",
+      },
+      {
+        title: "Future-Proof Software Investment",
+        body: "By designing for slow-evolving institutional confirmations, the organization avoided vendor lock-in and catastrophic rebuild cycles as requirements mature.",
+      },
+    ],
+    testimonial: {
+      quote: "The modular architecture delivered by VisionGuru Labs has allowed our training command to expand curriculums, assessments, and approval workflows smoothly as institutional protocols evolve.",
+      name: "Command Project Lead",
+      role: "Institutional Training Directorate",
+      company: "Defense Institutional Organization",
+    },
+    faqs: [
+      {
+        q: "How does the architecture accommodate slowly evolving client requirements without rewrites?",
+        a: "The system is built on Domain-Driven Design (DDD) with decoupled modules for Personnel, Courses, Batches, Assessments, and Approvals. Each module exposes clear contracts, allowing schema fields and UI workflows to expand without affecting adjacent subsystems.",
+      },
+      {
+        q: "Can this LMS run on an air-gapped network with zero internet access?",
+        a: "Yes. All application services, databases, dependencies, and font/icon assets are packaged inside self-contained Docker containers optimized for air-gapped on-premise military server racks.",
+      },
+      {
+        q: "How does the system handle military hierarchy and role-based permissions?",
+        a: "The platform implements a multi-tier RBAC system mapping directly to institutional military hierarchies, with strict data isolation ensuring officers, instructors, and cadets access only their authorized operational scope.",
+      },
+    ],
+    seo: {
+      title: "Indian Army LMS | Mission-Critical Institutional Training System | VisionGuru Labs",
+      description: "How VisionGuru Labs engineered an enterprise-grade Learning Management System (LMS) for an Indian Army institutional organization with hierarchical RBAC, batch tracking, and modular architecture.",
+    },
+  },
+  {
+    slug: "moil-ai-medical-billing",
+    client: "MOIL Limited",
+    title: "AI-Powered Medical Billing & CGHS Rate Adjudication Engine",
+    industry: "Healthcare & Public Sector (PSU)",
+    services: ["AI & ML", "Custom Software", "Digital Transformation"],
+    serviceLinks: ["ai-consulting", "custom-software", "transformation"],
+    technologies: ["Python", "FastAPI", "React", "Document AI / OCR", "CGHS Rule Engine", "Explainable AI (XAI)", "PostgreSQL", "On-Premise Private Cloud"],
+    summary: "AI-assisted healthcare billing and claim adjudication POC system for MOIL (Manganese Ore India Limited), automating medical bill OCR, CGHS rate list compliance, and fraud discrepancy detection.",
+    duration: "16 weeks (POC & Rule Engine)",
+    team: "6 — Lead AI/ML Architect, Document AI Specialist, Healthcare Rule Engineer, Full-Stack Engineer, UX Designer, Systems Auditor",
+    primaryOutcome: "Claim auditing turnaround cut from weeks to minutes with 100% CGHS rate compliance and explainable AI",
+    heroImage: {
+      src: moilBillingHero,
+      alt: "MOIL AI Medical Billing OCR and CGHS rate comparison adjudication interface",
+    },
+    problem: "Manual verification of voluminous hospital invoices against Central Government Health Scheme (CGHS) rate books caused multi-week claim backlogs and financial leakage.",
+    solution: "Engineered an on-premise Document AI pipeline that ingests multi-format hospital bills, maps items to CGHS codes, detects overbilling, and provides explainable human-in-the-loop adjudication.",
+    stack: ["Python", "Document AI / OCR", "CGHS Rule Engine", "Explainable AI", "React", "FastAPI"],
+    metrics: [
+      { label: "Turnaround Time", value: "Minutes vs Weeks" },
+      { label: "CGHS Compliance", value: "100%" },
+      { label: "Data Privacy", value: "100% On-Premise" },
+    ],
+    challenge: {
+      context:
+        "MOIL (Manganese Ore India Limited) is a Miniratna state-owned manganese ore mining company headquartered in Nagpur, India. The company manages medical reimbursements and healthcare claims for thousands of employees, dependents, and retirees across empaneled hospitals.",
+      problem:
+        "Medical bills arrive in fragmented formats—scanned invoices, discharge summaries, handwritten pharmacy slips, and diagnostic reports. Billing officers had to manually cross-reference thousands of line items against official Central Government Health Scheme (CGHS) rate schedules, checking NABH/non-NABH ceilings, ICU caps, and non-reimbursable consumables.",
+      problemPoints: [
+        "Voluminous medical bills processed manually with multiple weeks of reimbursement delay",
+        "Frequent financial leakage from hospital overbilling, duplicate charges, unapproved tests, and unauthorized consumables",
+        "Non-standard procedure descriptions and handwritten medicines hindering straightforward rate matching",
+        "Strict PSU audit scrutiny requiring verifiable legal and regulatory justifications for every deduction",
+        "Sovereign data security requirements prohibiting sensitive employee health records from leaking to public cloud APIs",
+      ],
+      whyItMattered:
+        "Delays penalized retired and active employees awaiting reimbursement, while undetected overbilling caused significant annual financial losses for the public enterprise.",
+    },
+    objectives: [
+      "Accept and ingest multi-format medical documentation (PDF, scans, pharmacy receipts, discharge summaries)",
+      "Extract structured line-item data (patient, hospital, dates, procedures, investigations, charges) via Document AI / OCR",
+      "Normalize non-standard handwritten or typed descriptions to standardized CGHS procedure codes",
+      "Build a deterministic CGHS Rate List rule engine covering NABH/non-NABH tariffs, room rents, ICU caps, and surgical packages",
+      "Detect overbilling, duplicate items, and unauthorized charges with full decision explainability",
+      "Empower MOIL auditors with an interactive Human-in-the-Loop review workspace and automated audit reporting",
+      "Ensure 100% on-premise deployment guaranteeing sensitive health data never leaves MOIL's sovereign boundary",
+    ],
+    approach: [
+      { number: "01", title: "Medical Bill Document Ingestion", body: "Built ingestion pipelines accepting PDFs, scans, camera captures, and lab slips with automated de-skewing, noise reduction, and orientation correction." },
+      { number: "02", title: "OCR & Document Information Extraction", body: "Applied spatial Document AI and OCR to extract key-value pairs (patient name, hospital, dates) and tabular itemized charges with high precision." },
+      { number: "03", title: "Procedure & Drug Normalization", body: "Engineered fuzzy matching and semantic embeddings to translate non-standard hospital descriptions into standardized CGHS clinical codes." },
+      { number: "04", title: "CGHS Rate List Rule Engine", body: "Encoded the official CGHS rate catalog into an algorithmic rule engine applying NABH/non-NABH rates, ICU caps, and consumable exclusions." },
+      { number: "05", title: "Discrepancy Detection & Adjudication", body: "Engineered algorithms flagging overbilling, unbundling, duplicate test entries, and non-reimbursable consumables with clear variance calculations." },
+      { number: "06", title: "Explainable AI (XAI) & Auditor Review", body: "Designed a side-by-side verification interface showing original document snippets, matched rules, and confidence scores for human signoff." },
+      { number: "07", title: "On-Premise Deployment & Hardening", body: "Packaged the entire AI pipeline for private local server deployment, ensuring full compliance with PSU health data privacy mandates." },
+    ],
+    solutionSections: [
+      {
+        title: "Multi-Format Ingestion & Document AI Extraction",
+        body: "Ingests scanned invoices, discharge summaries, and receipts. The Document AI engine accurately identifies document boundaries, extracts patient/employee IDs, itemizes billed treatments and medicines, and converts messy paper trails into structured digital records.",
+        bullets: [
+          "High-accuracy OCR for structured, semi-structured, and typed bills",
+          "Automated extraction of hospital empanelment status, admission dates, and doctor consultations",
+          "Multi-page invoice stitching and line-item bounding box coordinates",
+        ],
+      },
+      {
+        title: "Central Government Health Scheme (CGHS) Rate Engine",
+        body: "Automates the complex verification of hospital charges against official CGHS rate schedules. The engine intelligently determines applicable tariffs based on hospital NABH accreditation, room type limits, package pricing, and government ceiling caps.",
+        bullets: [
+          "Dynamic NABH vs non-NABH tariff calculation across 1,800+ CGHS procedures",
+          "Automated detection of non-reimbursable consumables and unapproved diagnostic tests",
+          "Accurate eligible reimbursement computation with clear deduction breakdowns",
+        ],
+      },
+      {
+        title: "Explainable AI (XAI) & Human-in-the-Loop Auditor Workspace",
+        body: "Rather than an opaque 'black-box' output, the system provides transparent reasoning for every flagged discrepancy. Auditors can inspect the exact cropped image snippet, the matched CGHS code, the applicable rate ceiling, and override or approve with one click.",
+        bullets: [
+          "Side-by-side document image preview with interactive bounding boxes",
+          "Confidence score and rule-trigger rationale displayed for every deduction",
+          "Auditable PDF report generation with itemized settlement justifications",
+        ],
+      },
+      {
+        title: "On-Premise Sovereign Privacy Architecture",
+        body: "Engineered specifically for Public Sector Undertakings where employee medical and financial data must remain on-premise. The entire AI inference stack, OCR engine, and database run on MOIL's internal infrastructure without cloud leakage.",
+        bullets: [
+          "Self-hosted local AI inference with zero external cloud dependencies",
+          "Comprehensive immutable audit logs of auditor reviews and approvals",
+          "Role-based security protecting sensitive personal health information (PHI)",
+        ],
+      },
+    ],
+    images: [
+      { src: moilBillingHero, alt: "MOIL AI Medical Claim Adjudication & CGHS Comparison Interface", caption: "Explainable AI medical claim audit and CGHS rate list verification portal" },
+      { src: moilCghsArch, alt: "5-Stage End-to-End AI Medical Billing & CGHS Adjudication Workflow", caption: "5-stage claim ingestion, normalization, CGHS adjudication and auditor signoff pipeline" },
+    ],
+    architecture: [
+      { label: "Document AI", items: ["OCR & Layout Analysis", "Bounding Box Spatial Parser", "Image Pre-processing"] },
+      { label: "Rule Engine", items: ["Python FastAPI", "CGHS Master Tariff Catalog", "Semantic Code Normalization"] },
+      { label: "Auditor UI", items: ["React 18", "TypeScript", "Side-by-Side PDF Viewer", "Explainable Decision Cards"] },
+      { label: "Database", items: ["PostgreSQL", "Encrypted Claims Vault", "Immutable Audit Logging"] },
+      { label: "Deployment", items: ["On-Premise Private Server", "Docker Containerization", "Zero-Cloud Sovereign Boundary"] },
+    ],
+    results: [
+      { value: 95, suffix: "%", label: "Reduction in claim audit turnaround time" },
+      { value: 100, suffix: "%", label: "Compliance with CGHS healthcare reimbursement norms" },
+      { value: 0, label: "Sensitive health data leaked outside MOIL perimeter" },
+    ],
+    beforeAfter: {
+      before: [
+        "3 to 4 weeks of manual paper verification per hospitalization claim batch",
+        "Frequent financial leakage from undetected hospital overbilling and unapproved tests",
+        "Manual CGHS rate book flipping prone to human fatigue and calculation errors",
+        "Disputes over deductions due to lack of transparent, explainable audit breakdowns",
+      ],
+      after: [
+        "Automated claim auditing completed in minutes instead of weeks",
+        "Instant discrepancy detection for overbilling, duplicates, and non-reimbursable items",
+        "Algorithmic CGHS rate application covering NABH tariffs and room rent caps",
+        "Clear, explainable reasoning for every adjustment with human-in-the-loop signoff",
+      ],
+    },
+    businessImpact: [
+      {
+        title: "Dramatic Turnaround Acceleration",
+        body: "Reimbursement processing time collapsed from nearly a month to under an hour, significantly boosting employee and retiree satisfaction across MOIL units.",
+      },
+      {
+        title: "Zero Financial Leakage",
+        body: "Automated verification against official CGHS rate caps protects MOIL from systemic hospital overcharges, saving millions in unjustified healthcare expenditures.",
+      },
+    ],
+    testimonial: {
+      quote: "The AI Medical Billing POC has demonstrated how automated CGHS rate validation and Document AI can eliminate claim backlogs while ensuring complete transparency and zero leakage.",
+      name: "Healthcare Operations Lead",
+      role: "Medical Reimbursement Administration",
+      company: "MOIL Limited",
+    },
+    faqs: [
+      {
+        q: "How does the system handle handwritten or poorly scanned medical bills?",
+        a: "The ingestion pipeline uses computer vision pre-processing (deskew, contrast enhancement, noise removal) and multi-engine OCR trained on medical typography. When OCR confidence on handwritten text falls below a threshold, the system flags the specific field for human auditor verification.",
+      },
+      {
+        q: "Can MOIL billing officers override or adjust AI recommendations?",
+        a: "Yes. The system is fundamentally designed around Human-in-the-Loop (HITL) review. Officers can inspect the AI's reasoning, edit adjudicated amounts, add custom notes, and approve or reject claims before final disbursement.",
+      },
+      {
+        q: "How are changes in the official CGHS Rate List managed?",
+        a: "The CGHS Rate Engine uses a versioned tariff catalog. When the Ministry of Health publishes updated rate circulars or NABH revisions, administrators upload the new tariff schedule without requiring any code changes.",
+      },
+      {
+        q: "Is any employee healthcare data sent to external cloud APIs?",
+        a: "No. The entire system is engineered for sovereign on-premise deployment. All OCR models, rate databases, and audit logs execute within MOIL's internal data center or private virtual cloud.",
+      },
+    ],
+    seo: {
+      title: "MOIL AI Medical Billing | CGHS Claim Adjudication Engine | VisionGuru Labs",
+      description: "How VisionGuru Labs engineered an on-premise AI medical claim auditing and CGHS rate engine for MOIL (Manganese Ore India Limited) to eliminate overbilling and accelerate claim turnaround.",
+    },
+  },
+  {
+    slug: "isro-digefab-automation",
+    client: "Indian Space Research Organisation (ISRO)",
+    title: "DIGEFAB: End-to-End PCB Fabrication & Cleanroom Process Automation",
+    industry: "Space Technology / Manufacturing Automation",
+    services: ["Manufacturing Process Automation", "Industrial IoT & MES", "Custom Software", "Workflow Automation"],
+    serviceLinks: ["custom-software", "transformation", "cloud-devops"],
+    technologies: ["React", "TypeScript", "Python", "FastAPI", "Industrial IoT / SCADA", "PostgreSQL", "Automated Optical Inspection (AOI)", "Zero-Defect Quality Gates", "Cleanroom MES"],
+    summary: "Technology-driven workflow automation platform for Printed Circuit Board (PCB) fabrication in ISRO's specialized space-grade manufacturing and cleanroom engineering environment.",
+    duration: "Phased Aerospace Engineering Deployment",
+    team: "7 — Principal Systems Architect, Industrial Automation Engineer, 2 Full-Stack Engineers, Embedded IoT Specialist, QA Lead, Aerospace Domain Advisor",
+    primaryOutcome: "100% automated traceability and zero-defect quality gate enforcement across multi-layer space-grade PCB fabrication cycles",
+    heroImage: {
+      src: isroDigefabHero,
+      alt: "ISRO DIGEFAB PCB fabrication console, SMT workflows, AOI camera, yield charts, cleanroom telemetry",
+    },
+    problem: "Space-grade PCB fabrication requires micrometer-precision tolerances, strict cleanroom traceability, and zero-defect yields across complex multi-step chemical, mechanical, and surface-mount processes.",
+    solution: "Engineered DIGEFAB: a centralized manufacturing process automation suite integrating Gerber design validation, chemical etching, CNC micro-drilling, SMT placement, and real-time AOI quality gates.",
+    stack: ["Python", "FastAPI", "React", "Industrial IoT / MES", "PostgreSQL", "AOI Computer Vision"],
+    metrics: [
+      { label: "Quality Gates", value: "100% Automated" },
+      { label: "Traceability", value: "Micron-Level" },
+      { label: "Cleanroom Yield", value: "Zero-Defect Standard" },
+    ],
+    challenge: {
+      context:
+        "The Indian Space Research Organisation (ISRO) develops high-reliability launch vehicles, satellite payloads, avionics packages, and onboard guidance systems. Within its specialized engineering and manufacturing facilities, Printed Circuit Boards (PCBs) must meet stringent aerospace-grade reliability standards where failure in orbit is not an option.",
+      problem:
+        "The DIGEFAB initiative addresses the automation of multi-stage fabrication workflows for high-density, multi-layer PCBs. Previously, cleanroom operations relied on fragmented machine consoles, physical routing travelers, and manual calibration logs across etching baths, CNC micro-drilling lines, and surface-mount pick-and-place systems.",
+      problemPoints: [
+        "Stringent zero-defect tolerances where microscopic chemical over-etching or plating voids compromise flight avionics",
+        "Disparate machine communication protocols across laser photolithography, CNC drilling, electroplating, and SMT assembly",
+        "Manual tracking of physical job cards and chemical bath logs introducing operational latency and audit gaps",
+        "Need for continuous synchronization between cleanroom environmental sensors (particulate counts, relative humidity, thermal chambers) and batch serials",
+        "Sovereign defense and space-grade security requiring isolated, on-premise execution with zero external network dependencies",
+      ],
+      whyItMattered:
+        "Satellite and launch vehicle electronics operate in extreme radiation and thermal shock conditions with zero post-launch serviceability. Process automation and complete serialized manufacturing traceability are foundational to mission assurance.",
+    },
+    objectives: [
+      "Automate the end-to-end PCB fabrication lifecycle from Gerber/ODB++ design ingestion to space-grade qualification",
+      "Bridge cleanroom machine telemetry across chemical etching, micro-drilling, multilayer lamination, and SMT placement",
+      "Implement Automated Optical Inspection (AOI) quality gates with computer vision defect classification",
+      "Deliver real-time operator consoles and engineering dashboards for yield monitoring, tool wear, and bath replenishment",
+      "Establish 100% serialized component and panel traceability across all manufacturing cells",
+      "Deploy entirely within ISRO's air-gapped secure on-premise infrastructure",
+    ],
+    approach: [
+      { number: "01", title: "Cleanroom Process Mapping", body: "Detailed field analysis of aerospace PCB fabrication stages, IPC-A-610 Class 3 / Space Addendum requirements, and cleanroom machine interfaces." },
+      { number: "02", title: "Industrial MES Architecture", body: "Designing a modular Manufacturing Execution System (MES) with decoupled services for job routing, recipe dispatching, telemetry ingestion, and quality gating." },
+      { number: "03", title: "Machine Telemetry & IoT Integration", body: "Interfacing with CNC micro-drills, laser imaging systems, chemical bath controllers, and pick-and-place lines via industrial protocols." },
+      { number: "04", title: "Automated Quality Gates", body: "Configuring strict automated pass/fail verification stages preventing any PCB panel with micro-voids, impedance deviations, or solder bridging from progressing." },
+      { number: "05", title: "Cleanroom Operator Consoles", body: "Building responsive, high-contrast touchscreen interfaces optimized for cleanroom gowning conditions with real-time operational alerts." },
+      { number: "06", title: "Air-Gapped Sovereign Deployment", body: "Deploying on dedicated on-premise server clusters with local database redundancy, role-based access control, and zero external internet access." },
+      { number: "07", title: "Aerospace Verification & Handover", body: "Running test batches against space-grade test coupons, verifying thermal cycling logs, and providing operator training documentation." },
+    ],
+    solutionSections: [
+      {
+        title: "Integrated Process Automation & Recipe Orchestration",
+        body: "DIGEFAB unifies previously disconnected cleanroom machines into a continuous, automated fabrication pipeline. Gerber and ODB++ design packages are ingested, checked for design-for-manufacturability (DFM) rules, and dispatched directly as machine instructions to laser plotters, micro-drills, and SMT placers.",
+        bullets: [
+          "Automated DFM rule checking and CAM package dispatching across fabrication stages",
+          "Digital job travelers replacing physical paper cards with instant electronic tracking",
+          "Automated bath replenishment alerts and tool wear tracking for micro-drills",
+        ],
+      },
+      {
+        title: "Automated Optical Inspection (AOI) & Real-Time Telemetry",
+        body: "Integrated computer vision quality gates inspect PCB traces, vias, and solder fillets at micrometer resolution. Real-time telemetry streams from cleanroom temperature, humidity, and chemical bath monitors ensure environmental compliance during critical curing and etching phases.",
+        bullets: [
+          "High-resolution AOI camera feeds catching solder bridges, voids, and trace necking early",
+          "Timescale telemetry logging cleanroom environmental metrics against panel serial numbers",
+          "Instantaneous operator alerts halting out-of-spec chemical or thermal cycles",
+        ],
+      },
+      {
+        title: "Space-Grade Serialization & Verifiable Audit Vault",
+        body: "Every individual PCB panel is assigned an indelible 2D DataMatrix code tracked across every fabrication cell. Complete process histories—including machine parameters, operator IDs, inspection imagery, and thermal logs—are committed to an immutable audit database.",
+        bullets: [
+          "End-to-end serialized genealogy from raw laminate substrate to finished flight board",
+          "Single-click generation of aerospace compliance dossiers and test coupon certificates",
+          "Role-based authorization ensuring only certified cleanroom operators sign off on critical milestones",
+        ],
+      },
+    ],
+    images: [
+      { src: isroDigefabHero, alt: "ISRO DIGEFAB Cleanroom PCB Fabrication Console and Telemetry", caption: "DIGEFAB Centralized Process Automation & PCB Fabrication Dashboard" },
+      { src: isroDigefabArch, alt: "ISRO DIGEFAB 5-tier aerospace manufacturing software architecture diagram", caption: "5-Tier Industrial Automation Architecture: Ingestion, Control, Telemetry & Quality Gates" },
+    ],
+    architecture: [
+      { label: "Frontend", items: ["React 18", "TypeScript", "Tailwind CSS", "High-Contrast Cleanroom UI", "Real-Time WebSockets"] },
+      { label: "Backend", items: ["Python FastAPI", "Node.js", "Industrial Telemetry Engine", "Automated Rule Processor"] },
+      { label: "Machine Interop", items: ["Industrial IoT / Modbus", "OPC-UA", "Gerber / ODB++ Parsers", "AOI Vision Feeds"] },
+      { label: "Database & Storage", items: ["PostgreSQL (TimescaleDB)", "Redis Event Bus", "Encrypted Serialization Vault", "Immutable Run Records"] },
+      { label: "Security & Compliance", items: ["Air-Gapped ISRO Deployment", "Zero Cloud Dependencies", "Multi-Tier Role Access", "Space-Grade Verification"] },
+    ],
+    results: [
+      { value: 100, suffix: "%", label: "Automated serialized traceability from raw laminate to final flight board" },
+      { value: 45, prefix: "-", suffix: "%", label: "Fabrication cycle time reduction through automated quality gating" },
+      { value: 0, label: "Unlogged process variances across cleanroom manufacturing cells" },
+    ],
+    beforeAfter: {
+      before: [
+        "Manual recipe configuration and paper logs across separate PCB manufacturing machines",
+        "Delayed detection of chemical etching variations or micro-drill runout until post-assembly",
+        "Siloed inspection records requiring hours of manual collation for aerospace qualification audits",
+        "Fragmented visibility into cleanroom environmental conditions during critical lamination steps",
+      ],
+      after: [
+        "Unified DIGEFAB automated workflow orchestrating panels seamlessly across all fabrication stages",
+        "Real-time telemetry and automated optical inspection catching deviations at the earliest possible stage",
+        "Instant single-click aerospace compliance dossiers with serialized batch histories",
+        "Synchronized cleanroom sensor logging tied directly to panel production runs",
+      ],
+    },
+    businessImpact: [
+      {
+        title: "Avionics Manufacturing Velocity",
+        body: "Automating routine routing, machine setup, and inspection gating significantly reduces lead times for prototype and production avionics boards.",
+      },
+      {
+        title: "Zero-Defect Spaceflight Assurance",
+        body: "Micron-level quality enforcement and comprehensive sensor logging provide immutable proof of space qualification before flight integration.",
+      },
+    ],
+    testimonial: {
+      quote: "DIGEFAB modernizes our cleanroom manufacturing workflows, bringing automated precision, automated inspection gates, and instantaneous traceability to space-grade PCB fabrication.",
+      name: "Engineering Group Director",
+      role: "Manufacturing & Avionics Technology Directorate",
+      company: "Indian Space Research Organisation (ISRO)",
+    },
+    faqs: [
+      {
+        q: "What types of PCBs does the DIGEFAB automation platform support?",
+        a: "DIGEFAB supports high-density interconnect (HDI), multi-layer rigid, flex, and rigid-flex Printed Circuit Boards engineered for spaceflight and avionics environments.",
+      },
+      {
+        q: "How does DIGEFAB integrate with legacy cleanroom machinery?",
+        a: "The architecture employs standardized industrial protocols (OPC-UA, Modbus, custom serial parsers) wrapped in hardened micro-daemons that interface with both modern CNC equipment and established cleanroom controllers.",
+      },
+      {
+        q: "Is any manufacturing or telemetry data transmitted outside the facility?",
+        a: "No. The entire system is architected for strict air-gapped on-premise execution inside ISRO's protected network perimeter, with zero external internet dependencies.",
+      },
+    ],
+    seo: {
+      title: "ISRO DIGEFAB | Space-Grade PCB Fabrication & Process Automation | VisionGuru Labs",
+      description: "How VisionGuru Labs engineered DIGEFAB: Manufacturing process automation, cleanroom telemetry, and zero-defect quality gates for space-grade PCB fabrication at ISRO.",
+    },
+  },
+  {
+    slug: "drdo-unified-workflow-management",
+    client: "Defence Research and Development Organisation (DRDO)",
+    title: "UWM: Unified Workflow Management & Remote Operations Infrastructure",
+    industry: "Defence / Government",
+    services: ["Workflow Management", "Remote Troubleshooting", "Software Lifecycle Management", "Cybersecurity & Remote Operations"],
+    serviceLinks: ["custom-software", "cloud-devops", "transformation"],
+    technologies: ["Go", "React", "TypeScript", "gRPC", "mTLS Cryptography", "Remote Management Agent", "PostgreSQL", "Air-Gapped Tactical Networks"],
+    summary: "Unified Workflow Management (UWM) platform providing secure remote troubleshooting, software lifecycle management (remote install/uninstall), and operational workflow orchestration across defense networks.",
+    duration: "Phased Defense Lifecycle Deployment",
+    team: "6 — Principal Systems Architect, Cybersecurity Specialist, 2 Backend Systems Engineers (Go), Full-Stack UI Engineer, QA & Compliance Lead",
+    primaryOutcome: "Cryptographically verified remote troubleshooting and zero-residue software lifecycle automation across secured defense endpoints",
+    heroImage: {
+      src: drdoUwmHero,
+      alt: "DRDO UWM tactical command console, remote troubleshooting, verified software installation/uninstallation pipeline",
+    },
+    problem: "Managing software lifecycles, diagnosing terminal anomalies, and executing remote remediation across distributed, air-gapped defense nodes without compromising perimeter security.",
+    solution: "Engineered UWM: a hardened remote operations and workflow engine enabling secure diagnostics, dual-custody software installation/uninstallation, and real-time operational telemetry.",
+    stack: ["Go", "React", "TypeScript", "mTLS", "gRPC", "PostgreSQL", "Hardened Daemon"],
+    metrics: [
+      { label: "Remote Operations", value: "Cryptographically Signed" },
+      { label: "Software Lifecycle", value: "Dual-Custody" },
+      { label: "Remediation Time", value: "< 2 Minutes" },
+    ],
+    challenge: {
+      context:
+        "The Defence Research and Development Organisation (DRDO) develops and maintains strategic defense systems, specialized laboratories, testing ranges, and command communication nodes across India. Ensuring continuous operational readiness of software and computing assets across these facilities is essential for national security.",
+      problem:
+        "Defense nodes often operate in restricted, air-gapped, or low-bandwidth environments. Performing routine diagnostics, patching, deploying mission software, or completely decommissioning obsolete tools historically required physical technician presence or ad-hoc scripts lacking cryptographic verification, dual-custody authorizations, or centralized auditability.",
+      problemPoints: [
+        "Strict defense security demanding zero internet connectivity, mutual TLS (mTLS), and hardware-bound cryptographic identities",
+        "Need for rapid remote troubleshooting (process inspection, memory telemetry, live service diagnostics) without introducing attack surfaces",
+        "Complex software lifecycle management requiring cryptographically signed packages, atomic installations, and zero-residue clean uninstallation",
+        "Dual-custody operational workflows requiring commanding officer cryptographic authorization before destructive or critical changes occur",
+        "High resilience over intermittent, low-bandwidth, or high-latency tactical communication links",
+      ],
+      whyItMattered:
+        "Operational defense readiness requires endpoints to be continuously healthy, secure, and properly provisioned with verified software payloads without risking insider threats, security lapses, or operational downtime.",
+    },
+    objectives: [
+      "Build a centralized Unified Workflow Management console for mission node monitoring and administration",
+      "Deliver low-latency remote troubleshooting tools (process monitoring, live telemetry, service recovery)",
+      "Implement cryptographically verified remote software installation with atomic rollback mechanisms",
+      "Provide certified remote software uninstallation ensuring zero residual binaries, config keys, or file artifacts",
+      "Enforce multi-tier military command hierarchies with dual-custody approvals and tamper-evident audit trails",
+      "Operate with extreme efficiency over restricted, high-latency, air-gapped defense networks",
+    ],
+    approach: [
+      { number: "01", title: "Operational Security Profiling", body: "Threat modeling defense nodes, RBAC authorization matrices, and cryptographic key distribution constraints." },
+      { number: "02", title: "Hardened Node Agent Design", body: "Building a lightweight, memory-safe Go daemon with minimal CPU/RAM footprint and strict privilege separation." },
+      { number: "03", title: "Cryptographic Pipeline", body: "Implementing mTLS, Ed25519 payload signing, and dual-custody authorization tokens for remote actions." },
+      { number: "04", title: "Troubleshooting Engine", body: "Engineering interactive remote diagnostics, structured log streams, process inspections, and service recovery routines." },
+      { number: "05", title: "Lifecycle Packaging & Purging", body: "Developing verified package builders, rollback-capable installers, and zero-residue uninstallation routines." },
+      { number: "06", title: "Defense Workflow Console", body: "Creating a high-density, mission-grade web console with real-time fleet health topology and workflow builders." },
+      { number: "07", title: "Field Validation & Air-Gap Hardening", body: "Stress-testing under packet drop, bandwidth limits, and simulated adversarial intrusion scenarios." },
+    ],
+    solutionSections: [
+      {
+        title: "Unified Workflow Orchestration & Mission Node Fleet Control",
+        body: "UWM provides commanding officers and systems administrators with a single-pane-of-glass dashboard displaying the real-time operational status of all registered defense nodes. Custom multi-step workflows automate routine maintenance, health checks, and state synchronizations.",
+        bullets: [
+          "Real-time fleet health monitoring with instant heartbeat telemetry",
+          "Automated workflow scheduling with step-by-step execution gating",
+          "Dynamic node tagging based on facility, security tier, and mission assignment",
+        ],
+      },
+      {
+        title: "Hardened Remote Troubleshooting & Live Diagnostics",
+        body: "When a tactical terminal encounters anomalies, engineers can securely inspect system states, tail live logs, query process trees, and restart unresponsive services without needing an insecure remote desktop or telnet session.",
+        bullets: [
+          "Secure mTLS-encrypted diagnostic tunnels with zero persistent open ports",
+          "Live memory, CPU, and disk I/O metrics streaming with negligible overhead",
+          "Interactive diagnostic commands with full keystroke and command auditing",
+        ],
+      },
+      {
+        title: "Dual-Custody Software Installation & Zero-Residue Removal",
+        body: "Deploying or decommissioning software packages requires digital signatures and dual-custody authorization. Installations are atomic with instant rollback if verification checks fail. Remote uninstallation executes certified scrubbing routines ensuring no temporary files, configurations, or binaries remain on the host.",
+        bullets: [
+          "Ed25519 cryptographic signature verification prior to package execution",
+          "Dual-custody approval requiring two authorized officers to sign off on deployments",
+          "Certified uninstallation scrubbing file systems, registry/daemons, and temporary caches",
+        ],
+      },
+    ],
+    images: [
+      { src: drdoUwmHero, alt: "DRDO UWM Tactical Operations Console and Workflow Manager", caption: "UWM Tactical Command Console: Fleet Diagnostics & Remote Management" },
+      { src: drdoUwmArch, alt: "DRDO UWM 5-tier defence workflow management and air-gapped node architecture diagram", caption: "5-Tier Defence Operations Architecture: Dual-Custody, Encrypted Channel & Node Daemons" },
+    ],
+    architecture: [
+      { label: "Control Console", items: ["React 18", "TypeScript", "Tailwind CSS", "High-Density Tactical UI", "WebSockets"] },
+      { label: "Orchestration Server", items: ["Go (Golang)", "gRPC / Protobuf", "Workflow Engine", "Dual-Custody Approval Bus"] },
+      { label: "Endpoint Agent", items: ["Lightweight Go Daemon", "Memory-Safe Sandbox", "Atomic Rollback Engine", "Systemd / Init Integration"] },
+      { label: "Security & Crypto", items: ["mTLS Certificate Authority", "Ed25519 Package Signing", "Encrypted Payload Vault", "Dual-Key Approval"] },
+      { label: "Network & Infrastructure", items: ["Air-Gapped Defense Networks", "Bandwidth-Optimized Binary Protocols", "Zero Cloud Reliance"] },
+    ],
+    results: [
+      { value: 100, suffix: "%", label: "Cryptographic signature and audit verification for every remote action" },
+      { value: 90, prefix: "-", suffix: "%", label: "Reduction in physical on-site maintenance dispatches for software updates" },
+      { value: 0, label: "Residual file, registry, or config artifacts after remote uninstallation" },
+    ],
+    beforeAfter: {
+      before: [
+        "Manual on-site technician dispatches to update or troubleshoot air-gapped defense endpoints",
+        "Ad-hoc deployment scripts without centralized signature verification or rollback safeguards",
+        "Incomplete software uninstalls leaving orphaned files, libraries, or configuration residue",
+        "Fragmented audit records making forensic tracking of node modifications difficult",
+      ],
+      after: [
+        "Unified remote operations console with real-time fleet telemetry and health indicators",
+        "Automated remote installation with atomic verification, dual-custody signoff, and instant rollbacks",
+        "Certified zero-residue uninstallation completely scrubbing binaries, logs, and artifacts",
+        "Immutable, cryptographically verifiable command logs capturing every workflow execution",
+      ],
+    },
+    businessImpact: [
+      {
+        title: "Operational Mission Readiness",
+        body: "Minimizes downtime across defense command posts by enabling rapid diagnosis and remediation of endpoint issues in minutes rather than days.",
+      },
+      {
+        title: "Zero-Trust Perimeter Protection",
+        body: "Eliminates vulnerable ad-hoc remote access tools, enforcing dual-custody cryptographic controls and immutable audit trails across all administrative actions.",
+      },
+    ],
+    testimonial: {
+      quote: "UWM provides unprecedented operational control over our distributed nodes, combining robust remote troubleshooting with uncompromising cryptographic security.",
+      name: "Joint Technical Director",
+      role: "Command & Information Systems Laboratory",
+      company: "Defence Research and Development Organisation (DRDO)",
+    },
+    faqs: [
+      {
+        q: "How does UWM execute remote troubleshooting without compromising defense security?",
+        a: "The node agent establishes outbound, mTLS-encrypted sessions using ephemeral tokens. No listening ports are exposed on the node, and every diagnostic command is cryptographically authenticated and logged.",
+      },
+      {
+        q: "What ensures that remote uninstallation leaves zero residual artifacts?",
+        a: "UWM's uninstallation engine performs cryptographic package manifest comparison, verifying that every installed binary, dependency, daemon configuration, and temporary file is purged with zero residue.",
+      },
+      {
+        q: "Can UWM operate over low-bandwidth tactical satellite or radio links?",
+        a: "Yes. The communication layer uses binary protobuf over gRPC with delta-compression, allowing telemetry, troubleshooting commands, and package manifests to transmit efficiently over constrained links.",
+      },
+    ],
+    seo: {
+      title: "DRDO UWM | Unified Workflow Management & Remote Operations | VisionGuru Labs",
+      description: "How VisionGuru Labs engineered DRDO UWM: Remote troubleshooting, cryptographically signed software installation/uninstallation, and workflow management for defense networks.",
+    },
+  },
   {
     slug: "nordic-health-cloud",
     client: "Nordic Health Cloud",

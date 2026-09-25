@@ -37,8 +37,8 @@ function Index() {
   return (
     <PageShell>
       <Hero />
-      <TrustBar />
       <ClientsStrip />
+      <TrustBar />
       <AboutBlock />
       <ServicesGrid />
       <ProcessTimeline />

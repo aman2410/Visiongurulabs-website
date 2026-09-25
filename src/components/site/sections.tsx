@@ -2,7 +2,9 @@ import { Link } from "@tanstack/react-router";
 import {
   ArrowRight, Check, X, Quote, ChevronLeft, ChevronRight, Sparkles,
   Play, Pause, Zap, ShieldCheck, Cpu, Bot, MessageSquare, Network,
-  Layers, ArrowUpRight, Filter,
+  Layers, ArrowUpRight, Filter, Building2, CheckCircle2, Lock, TrendingUp,
+  GraduationCap, Scale, FileText, FileCheck, Orbit, Workflow, Wrench,
+  DownloadCloud, Trash2,
 } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
@@ -19,46 +21,401 @@ import { allCaseStudies } from "@/lib/case-studies-data";
 import { clientLogos } from "@/lib/client-logos";
 import heroBg from "@/assets/hero-network.jpg";
 import aiBg from "@/assets/ai-backdrop.jpg";
+import indianArmyShield from "@/assets/clients/indian-army-shield.png";
+import moilLogo from "@/assets/clients/moil-crest.png";
+import isroLogo from "@/assets/clients/isro-space-research.svg";
+import drdoLogo from "@/assets/clients/drdo-emblem.png";
 
 export function ClientsStrip() {
   const [isPaused, setIsPaused] = useState(false);
 
   const row = (dup: boolean) => (
     <div
-      className={`flex shrink-0 animate-marquee items-center gap-12 pr-12 ${isPaused ? "marquee-paused" : ""}`}
+      className={`flex shrink-0 animate-marquee items-center gap-6 pr-6 md:gap-8 md:pr-8 ${isPaused ? "marquee-paused" : ""}`}
       aria-hidden={dup || undefined}
     >
-      {clientLogos.map((client) => (
-        <img
-          key={dup ? `${client.name}-dup` : client.name}
-          src={client.logo}
-          alt={dup ? "" : `${client.name} logo`}
-          loading="lazy"
-          decoding="async"
-          width={260}
-          height={64}
-          className="h-12 w-auto shrink-0 opacity-70 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
-        />
-      ))}
+      {clientLogos.map((client) => {
+        const content = (
+          <img
+            src={client.logo}
+            alt={dup ? "" : `${client.name} logo`}
+            loading="lazy"
+            decoding="async"
+            width={260}
+            height={64}
+            className="h-10 md:h-12 w-auto shrink-0 opacity-80 grayscale transition duration-300 group-hover:opacity-100 group-hover:grayscale-0 object-contain"
+          />
+        );
+
+        const allUrls = client.urls && client.urls.length > 0 ? client.urls : (client.url ? [client.url] : []);
+        const primaryUrl = allUrls[0];
+        const titleText = allUrls.length > 1
+          ? `${client.name} - Open websites (${allUrls.map(u => u.replace(/^https?:\/\//, '').replace(/\/$/, '')).join(' & ')})`
+          : `${client.name} - Visit Website`;
+
+        return primaryUrl ? (
+          <a
+            key={dup ? `${client.name}-dup` : client.name}
+            href={primaryUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={titleText}
+            onClick={(e) => {
+              if (allUrls.length > 1) {
+                for (let i = 1; i < allUrls.length; i++) {
+                  window.open(allUrls[i], "_blank", "noopener,noreferrer");
+                }
+              }
+            }}
+            className="flex items-center justify-center shrink-0 h-16 md:h-20 px-6 rounded-2xl bg-white border border-border/80 shadow-2xs hover:border-brand-navy/40 hover:shadow-xs transition-all duration-300 group cursor-pointer"
+          >
+            {content}
+          </a>
+        ) : (
+          <div
+            key={dup ? `${client.name}-dup` : client.name}
+            className="flex items-center justify-center shrink-0 h-16 md:h-20 px-6 rounded-2xl bg-white border border-border/80 shadow-2xs hover:border-brand-navy/40 hover:shadow-xs transition-all duration-300 group cursor-default"
+          >
+            {content}
+          </div>
+        );
+      })}
     </div>
   );
 
   return (
-    <section className="py-12 border-y border-border bg-paper overflow-hidden">
-      <div className="container-x mb-6 flex items-center justify-between gap-4">
-        <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-ink">
-          Trusted by visionary teams across Defense, Enterprise & High-Growth Startups
-        </span>
-        <button
-          type="button"
-          onClick={() => setIsPaused((prev) => !prev)}
-          className="inline-flex items-center gap-1.5 rounded-full border border-border/80 bg-background/90 px-3 py-1 text-xs font-medium text-slate hover:bg-background hover:text-ink transition-colors shadow-2xs cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-navy"
-          aria-label={isPaused ? "Resume client logo carousel" : "Pause client logo carousel"}
-        >
-          {isPaused ? <Play className="h-3 w-3 text-brand-red" /> : <Pause className="h-3 w-3 text-brand-navy" />}
-          <span>{isPaused ? "Play" : "Pause"}</span>
-        </button>
+    <section className="py-16 lg:py-24 border-y border-border bg-paper overflow-hidden relative">
+      <div className="container-x">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
+          <div className="inline-flex items-center gap-2 rounded-full border border-brand-navy/15 bg-white px-3.5 py-1 text-xs font-semibold text-brand-navy shadow-2xs mb-4">
+            <ShieldCheck className="h-4 w-4 text-brand-red" />
+            <span>National Defense, Aerospace & Sovereign Enterprise Trust</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-ink text-balance">
+            Battle-tested where failure is <span className="text-brand-red">never an option</span>.
+          </h2>
+          <p className="mt-4 text-base md:text-lg text-slate text-balance leading-relaxed">
+            From India’s armed forces and space agency to premier defense research and sovereign public enterprises, our team brings hands-on engineering pedigree to high-stakes, mission-critical initiatives.
+          </p>
+        </div>
+
+        {/* Team Scale Experience Highlight Banner */}
+        <div className="max-w-4xl mx-auto mb-12">
+          <div className="relative rounded-2xl bg-gradient-to-r from-brand-navy/[0.05] via-white to-brand-red/[0.04] border-2 border-brand-navy/15 p-4 sm:p-5 shadow-2xs flex flex-col sm:flex-row items-center sm:items-start gap-4">
+            <div className="h-10 w-10 rounded-xl bg-brand-navy text-white flex items-center justify-center shrink-0 shadow-xs mt-0.5">
+              <Sparkles className="h-5 w-5 text-amber-300" />
+            </div>
+            <div className="text-center sm:text-left flex-1 min-w-0">
+              <div className="text-xs font-bold uppercase tracking-wider text-brand-navy flex items-center justify-center sm:justify-start gap-2">
+                <span>Enterprise & Sovereign Systems Pedigree</span>
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              </div>
+              <p className="text-sm md:text-base font-semibold text-ink mt-1 leading-snug">
+                Our team is experienced in delivering large-scale, high-reliability engineering solutions for sovereign institutions: from <span className="text-brand-red font-bold">Indian Army</span> training platforms and <span className="text-brand-navy font-bold">ISRO</span> space-grade PCB automation to <span className="text-brand-navy font-bold">DRDO</span> tactical remote operations and <span className="text-brand-navy font-bold">MOIL</span> AI claims adjudication.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Flagship Spotlight Cards: Indian Army, ISRO, DRDO & MOIL */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-14">
+          {/* Card 1: Indian Army */}
+          <div className="relative rounded-2xl border-2 border-brand-navy/20 bg-white p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300 hover:border-brand-navy/40 flex flex-col justify-between h-full group">
+            <div>
+              <div className="flex items-start gap-5">
+                <div className="h-20 w-20 md:h-24 md:w-24 shrink-0 rounded-2xl bg-paper border border-border/80 flex items-center justify-center p-2.5 shadow-2xs group-hover:scale-105 transition-transform duration-300">
+                  <img
+                    src={indianArmyShield}
+                    alt="Indian Army Insignia"
+                    className="h-full w-auto object-contain drop-shadow-xs"
+                  />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="inline-flex items-center gap-1.5 rounded-full bg-red-50 text-brand-red border border-red-200/70 px-2.5 py-0.5 text-[11px] font-bold tracking-wide uppercase">
+                    <ShieldCheck className="h-3.5 w-3.5 text-brand-red" />
+                    <span>National Armed Forces</span>
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-extrabold text-ink tracking-tight mt-1.5">
+                    Indian Army
+                  </h3>
+                  <p className="text-xs md:text-sm font-semibold text-slate tracking-wide uppercase mt-0.5">
+                    Institutional LMS & Training Management System
+                  </p>
+                </div>
+              </div>
+
+              <p className="mt-4 text-xs md:text-sm text-slate leading-relaxed">
+                Developing an enterprise-grade Learning Management System (LMS) for an Indian Army-related institutional organization. Manages personnel, training batches, courses, examinations, attendance, and administrative approvals with multi-tier RBAC and a modular architecture built to evolve without rewrites.
+              </p>
+
+              <div className="my-5 border-t border-border/70" />
+
+              <div>
+                <div className="text-xs font-bold uppercase tracking-wider text-muted-ink mb-2.5">
+                  Core Workflows & Capabilities:
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-paper px-2.5 py-1 text-xs font-semibold text-brand-navy border border-border/80">
+                    <GraduationCap className="h-3.5 w-3.5 text-brand-navy" /> Training Batches & Personnel
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-paper px-2.5 py-1 text-xs font-semibold text-brand-navy border border-border/80">
+                    <ShieldCheck className="h-3.5 w-3.5 text-brand-red" /> Hierarchical Military RBAC
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-paper px-2.5 py-1 text-xs font-semibold text-brand-navy border border-border/80">
+                    <FileCheck className="h-3.5 w-3.5 text-emerald-600" /> Assessments & Results Tracking
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-paper px-2.5 py-1 text-xs font-semibold text-brand-navy border border-border/80">
+                    <Layers className="h-3.5 w-3.5 text-brand-sky" /> Modular Adaptable Architecture
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 pt-4 border-t border-border/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <Link
+                to="/case-studies/$slug"
+                params={{ slug: "indian-army-lms" }}
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-navy hover:text-brand-red transition-colors group/link"
+              >
+                <span>Explore Project Breakdown & Architecture</span>
+                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/link:translate-x-1 text-brand-red" />
+              </Link>
+              <div className="flex items-center gap-1.5 text-[11px] text-muted-ink">
+                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
+                <span>100% Audited · Air-Gapped Ready</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 2: ISRO (Indian Space Research Organisation) */}
+          <div className="relative rounded-2xl border-2 border-brand-navy/20 bg-white p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300 hover:border-brand-navy/40 flex flex-col justify-between h-full group">
+            <div>
+              <div className="flex items-start gap-5">
+                <div className="h-20 w-20 md:h-24 md:w-24 shrink-0 rounded-2xl bg-paper border border-border/80 flex items-center justify-center p-2.5 shadow-2xs group-hover:scale-105 transition-transform duration-300">
+                  <img
+                    src={isroLogo}
+                    alt="ISRO Logo"
+                    className="h-full w-auto object-contain drop-shadow-xs"
+                  />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="inline-flex items-center gap-1.5 rounded-full bg-orange-50 text-amber-700 border border-amber-200/70 px-2.5 py-0.5 text-[11px] font-bold tracking-wide uppercase">
+                    <Orbit className="h-3.5 w-3.5 text-amber-600" />
+                    <span>Government · Space Technology</span>
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-extrabold text-ink tracking-tight mt-1.5">
+                    ISRO
+                  </h3>
+                  <p className="text-xs md:text-sm font-semibold text-slate tracking-wide uppercase mt-0.5">
+                    DIGEFAB · Space-Grade PCB Fabrication Automation
+                  </p>
+                </div>
+              </div>
+
+              <p className="mt-4 text-xs md:text-sm text-slate leading-relaxed">
+                Technology-driven process automation for Printed Circuit Board (PCB) fabrication within ISRO's specialized space-grade cleanroom environment. Automates multi-stage fabrication workflows, CAM/Gerber validation, chemical etching, CNC micro-drilling, SMT placement, and real-time Automated Optical Inspection (AOI) quality gates.
+              </p>
+
+              <div className="my-5 border-t border-border/70" />
+
+              <div>
+                <div className="text-xs font-bold uppercase tracking-wider text-muted-ink mb-2.5">
+                  Core Workflows & Capabilities:
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-paper px-2.5 py-1 text-xs font-semibold text-brand-navy border border-border/80">
+                    <Cpu className="h-3.5 w-3.5 text-brand-navy" /> Manufacturing Process Automation
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-paper px-2.5 py-1 text-xs font-semibold text-brand-navy border border-border/80">
+                    <Layers className="h-3.5 w-3.5 text-amber-600" /> PCB Fabrication Lifecycle
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-paper px-2.5 py-1 text-xs font-semibold text-brand-navy border border-border/80">
+                    <Workflow className="h-3.5 w-3.5 text-emerald-600" /> Cleanroom Workflow Automation
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-paper px-2.5 py-1 text-xs font-semibold text-brand-navy border border-border/80">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-brand-sky" /> Space-Grade Quality Gates
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 pt-4 border-t border-border/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <Link
+                to="/case-studies/$slug"
+                params={{ slug: "isro-digefab-automation" }}
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-navy hover:text-brand-red transition-colors group/link"
+              >
+                <span>Explore Project Breakdown & Architecture</span>
+                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/link:translate-x-1 text-brand-red" />
+              </Link>
+              <div className="flex items-center gap-1.5 text-[11px] text-muted-ink">
+                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
+                <span>Air-Gapped Ready · Zero-Defect Standard</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 3: DRDO (Defence Research and Development Organisation) */}
+          <div className="relative rounded-2xl border-2 border-brand-navy/20 bg-white p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300 hover:border-brand-navy/40 flex flex-col justify-between h-full group">
+            <div>
+              <div className="flex items-start gap-5">
+                <div className="h-20 w-20 md:h-24 md:w-24 shrink-0 rounded-2xl bg-paper border border-border/80 flex items-center justify-center p-2.5 shadow-2xs group-hover:scale-105 transition-transform duration-300">
+                  <img
+                    src={drdoLogo}
+                    alt="DRDO Emblem"
+                    className="h-full w-auto object-contain drop-shadow-xs"
+                  />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 text-brand-navy border border-blue-200/70 px-2.5 py-0.5 text-[11px] font-bold tracking-wide uppercase">
+                    <ShieldCheck className="h-3.5 w-3.5 text-brand-navy" />
+                    <span>Government · Defence Research</span>
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-extrabold text-ink tracking-tight mt-1.5">
+                    DRDO
+                  </h3>
+                  <p className="text-xs md:text-sm font-semibold text-slate tracking-wide uppercase mt-0.5">
+                    UWM · Unified Workflow & Remote Operations
+                  </p>
+                </div>
+              </div>
+
+              <p className="mt-4 text-xs md:text-sm text-slate leading-relaxed">
+                Unified Workflow Management (UWM) engineered for tactical defense infrastructure and secure nodes. Delivers end-to-end operational capabilities including encrypted remote troubleshooting, cryptographically signed remote software installation, certified zero-residue uninstallation, and dual-custody workflow orchestration.
+              </p>
+
+              <div className="my-5 border-t border-border/70" />
+
+              <div>
+                <div className="text-xs font-bold uppercase tracking-wider text-muted-ink mb-2.5">
+                  Core Workflows & Capabilities:
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-paper px-2.5 py-1 text-xs font-semibold text-brand-navy border border-border/80">
+                    <Workflow className="h-3.5 w-3.5 text-brand-navy" /> Workflow Management
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-paper px-2.5 py-1 text-xs font-semibold text-brand-navy border border-border/80">
+                    <Wrench className="h-3.5 w-3.5 text-brand-red" /> Remote Troubleshooting
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-paper px-2.5 py-1 text-xs font-semibold text-brand-navy border border-border/80">
+                    <DownloadCloud className="h-3.5 w-3.5 text-emerald-600" /> Remote Software Installation
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-paper px-2.5 py-1 text-xs font-semibold text-brand-navy border border-border/80">
+                    <Trash2 className="h-3.5 w-3.5 text-amber-600" /> Zero-Residue Uninstallation
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 pt-4 border-t border-border/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <Link
+                to="/case-studies/$slug"
+                params={{ slug: "drdo-unified-workflow-management" }}
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-navy hover:text-brand-red transition-colors group/link"
+              >
+                <span>Explore Project Breakdown & Architecture</span>
+                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/link:translate-x-1 text-brand-red" />
+              </Link>
+              <div className="flex items-center gap-1.5 text-[11px] text-muted-ink">
+                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
+                <span>Dual-Custody · mTLS Encrypted</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 4: MOIL Limited */}
+          <div className="relative rounded-2xl border-2 border-brand-navy/20 bg-white p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300 hover:border-brand-navy/40 flex flex-col justify-between h-full group">
+            <div>
+              <div className="flex items-start gap-5">
+                <div className="h-20 w-20 md:h-24 md:w-24 shrink-0 rounded-2xl bg-paper border border-border/80 flex items-center justify-center p-2.5 shadow-2xs group-hover:scale-105 transition-transform duration-300">
+                  <img
+                    src={moilLogo}
+                    alt="MOIL Logo"
+                    className="h-full w-auto object-contain drop-shadow-xs"
+                  />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 text-brand-navy border border-blue-200/70 px-2.5 py-0.5 text-[11px] font-bold tracking-wide uppercase">
+                    <Building2 className="h-3.5 w-3.5 text-brand-navy" />
+                    <span>Miniratna PSU · Ministry of Steel</span>
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-extrabold text-ink tracking-tight mt-1.5">
+                    MOIL Limited
+                  </h3>
+                  <p className="text-xs md:text-sm font-bold text-brand-navy tracking-wide uppercase mt-0.5">
+                    A Government of India Enterprise
+                  </p>
+                </div>
+              </div>
+
+              <p className="mt-4 text-xs md:text-sm text-slate leading-relaxed">
+                AI-assisted healthcare billing and claim adjudication POC system for MOIL (Manganese Ore India Limited). Ingests multi-format medical bills, extracts line items via Document AI / OCR, normalizes medical terminology against official CGHS Rate Lists, detects overbilling, and provides explainable AI adjudication.
+              </p>
+
+              <div className="my-5 border-t border-border/70" />
+
+              <div>
+                <div className="text-xs font-bold uppercase tracking-wider text-muted-ink mb-2.5">
+                  Core Workflows & Capabilities:
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-paper px-2.5 py-1 text-xs font-semibold text-brand-navy border border-border/80">
+                    <FileText className="h-3.5 w-3.5 text-brand-navy" /> Document AI & Bill Ingestion
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-paper px-2.5 py-1 text-xs font-semibold text-brand-navy border border-border/80">
+                    <Scale className="h-3.5 w-3.5 text-brand-red" /> CGHS Rate-List Rule Engine
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-paper px-2.5 py-1 text-xs font-semibold text-brand-navy border border-border/80">
+                    <Sparkles className="h-3.5 w-3.5 text-emerald-600" /> Discrepancy & Overbilling Audit
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-paper px-2.5 py-1 text-xs font-semibold text-brand-navy border border-border/80">
+                    <Lock className="h-3.5 w-3.5 text-brand-sky" /> Explainable AI & On-Premise Privacy
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 pt-4 border-t border-border/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <Link
+                to="/case-studies/$slug"
+                params={{ slug: "moil-ai-medical-billing" }}
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-navy hover:text-brand-red transition-colors group/link"
+              >
+                <span>Explore Project Breakdown & Architecture</span>
+                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/link:translate-x-1 text-brand-red" />
+              </Link>
+              <div className="flex items-center gap-1.5 text-[11px] text-muted-ink">
+                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
+                <span>Turnaround: Weeks to Minutes · 100% CGHS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Marquee Subheader & Controls */}
+        <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-border/70">
+          <div>
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand-navy">
+              Trusted Across Defense, Space, Healthcare & High-Growth Startups
+            </span>
+            <p className="text-xs text-muted-ink mt-0.5">
+              Over 20+ specialized engagements delivered with senior-level architectural rigor
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => setIsPaused((prev) => !prev)}
+            className="inline-flex items-center gap-1.5 rounded-full border border-border/80 bg-white px-3.5 py-1 text-xs font-medium text-slate hover:bg-paper hover:text-ink transition-colors shadow-2xs cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-navy self-start sm:self-auto"
+            aria-label={isPaused ? "Resume client logo carousel" : "Pause client logo carousel"}
+          >
+            {isPaused ? <Play className="h-3 w-3 text-brand-red" /> : <Pause className="h-3 w-3 text-brand-navy" />}
+            <span>{isPaused ? "Play" : "Pause"}</span>
+          </button>
+        </div>
       </div>
+
+      {/* Enlarged High-Visibility Continuous Marquee Stream */}
       <div className="marquee-container relative flex overflow-hidden">
         {row(false)}
         {row(true)}
