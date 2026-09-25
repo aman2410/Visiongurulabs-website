@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://guru-spark-vision.lovable.app/"><img src="https://img.shields.io/badge/Status-Live-success?style=flat-square" alt="Status" /></a>
+  <a href="https://visiongurulabs.com/"><img src="https://img.shields.io/badge/Status-Live-success?style=flat-square" alt="Status" /></a>
   <img src="https://img.shields.io/badge/Stack-TanStack%20Start%20%7C%20React%2019-blue?style=flat-square" alt="Stack" />
   <img src="https://img.shields.io/badge/Styling-Tailwind%20CSS-38bdf8?style=flat-square" alt="Styling" />
   <img src="https://img.shields.io/badge/Runtime-Bun-fbf0df?style=flat-square&logo=bun" alt="Runtime" />
@@ -57,7 +57,7 @@
 ## 📁 Project Structure
 
 ```text
-guru-spark-vision/
+VisionGuruLabs-website/
 ├── .agents/
 │   └── skills/
 │       └── ui-ux-pro-max/      # AI design intelligence engine & database
@@ -94,8 +94,8 @@ guru-spark-vision/
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/aman2410/Visiongurulabs-website.git
-   cd Visiongurulabs-website
+   git clone https://github.com/aman2410/VisionGuruLabs-website.git
+   cd VisionGuruLabs-website
    ```
 
 2. Install dependencies:

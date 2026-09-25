@@ -18,13 +18,13 @@ export const Route = createFileRoute("/industries")({
       { name: "description", content: "Deep sector context across healthcare, BFSI, manufacturing, government, real estate, education, logistics, e-commerce, and recruitment." },
       { property: "og:title", content: "Industries we serve — VisionGuru Labs" },
       { property: "og:description", content: "Nine sectors, real domain fluency." },
-      { property: "og:url", content: "https://guru-spark-vision.lovable.app/industries" },
+      { property: "og:url", content: "https://visiongurulabs.com/industries" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Industries we serve — VisionGuru Labs" },
       { name: "twitter:description", content: "Nine sectors, real domain fluency." },
     ],
-    links: [{ rel: "canonical", href: "https://guru-spark-vision.lovable.app/industries" }],
+    links: [{ rel: "canonical", href: "https://visiongurulabs.com/industries" }],
     scripts: [
       {
         type: "application/ld+json",

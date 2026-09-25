@@ -19,13 +19,13 @@ export const Route = createFileRoute("/about")({
       { name: "description", content: "VisionGuru Labs LLP: a senior team of product, engineering, AI, and growth operators helping businesses navigate the next era of software." },
       { property: "og:title", content: "About VisionGuru Labs" },
       { property: "og:description", content: "Vision. Guru. Labs. A senior partner for software and AI." },
-      { property: "og:url", content: "https://guru-spark-vision.lovable.app/about" },
+      { property: "og:url", content: "https://visiongurulabs.com/about" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "About VisionGuru Labs" },
       { name: "twitter:description", content: "Vision. Guru. Labs. A senior partner for software and AI." },
     ],
-    links: [{ rel: "canonical", href: "https://guru-spark-vision.lovable.app/about" }],
+    links: [{ rel: "canonical", href: "https://visiongurulabs.com/about" }],
     scripts: [
       {
         type: "application/ld+json",

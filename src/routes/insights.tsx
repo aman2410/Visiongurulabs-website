@@ -22,13 +22,13 @@ export const Route = createFileRoute("/insights")({
       { name: "description", content: "Field notes on AI adoption, software architecture, startup operating models, and the technology trends shaping the next decade." },
       { property: "og:title", content: "Insights — VisionGuru Labs" },
       { property: "og:description", content: "Writing from the frontlines of AI and software engineering." },
-      { property: "og:url", content: "https://guru-spark-vision.lovable.app/insights" },
+      { property: "og:url", content: "https://visiongurulabs.com/insights" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Insights — VisionGuru Labs" },
       { name: "twitter:description", content: "Writing from the frontlines of AI and software engineering." },
     ],
-    links: [{ rel: "canonical", href: "https://guru-spark-vision.lovable.app/insights" }],
+    links: [{ rel: "canonical", href: "https://visiongurulabs.com/insights" }],
     scripts: [
       {
         type: "application/ld+json",

@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "tanstack_start_ts",
+      "name": "VisionGuruLabs-website",
       "dependencies": {
         "@fontsource-variable/inter": "^5.2.8",
         "@hookform/resolvers": "^5.2.2",
