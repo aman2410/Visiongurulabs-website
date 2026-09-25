@@ -4,7 +4,7 @@ import { insights } from "@/lib/site-data";
 import { allCaseStudies as caseStudies } from "@/lib/case-studies-data";
 import { serviceDetails } from "@/lib/services-data";
 
-const BASE_URL = "https://visiongurulabs.com";
+const BASE_URL = "https://www.visiongurulabs.com";
 
 interface SitemapEntry {
   path: string;

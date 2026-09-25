@@ -642,4 +642,4 @@ export const comparison = [
   { dimension: "Relationship", agency: "Project by project", us: "Long-term partnership" },
 ];
 
-export const SITE_URL = "https://visiongurulabs.com";
+export const SITE_URL = "https://www.visiongurulabs.com";

@@ -19,7 +19,7 @@ An expert-grade article page carries four categories of signals. The plan implem
 **Head metadata (per route via `head()`)**
 - Unique `<title>` — post title + " | VisionGuru Labs Insights", under 60 chars where possible
 - `<meta name="description">` — 150–160 char summary
-- Canonical self-referencing `https://visiongurulabs.com/insights/{slug}`
+- Canonical self-referencing `https://www.visiongurulabs.com/insights/{slug}`
 - Open Graph: `og:type=article`, `og:title`, `og:description`, `og:url`, `og:image` (absolute), `og:site_name`, `article:published_time`, `article:author`, `article:section`, `article:tag`
 - Twitter: `twitter:card=summary_large_image`, `twitter:title`, `twitter:description`, `twitter:image`
 - `<meta name="author">`, `<meta name="keywords">` (tags), `<meta name="robots" content="index,follow,max-image-preview:large">`
@@ -127,7 +127,7 @@ If `public/sitemap.xml` (or a `sitemap.xml.tsx` route) exists, add one entry per
 
 - `insights.$slug.tsx` maps to `/insights/$slug` per file-based routing rules; `Route.useParams()` returns `{ slug }`.
 - Loader is synchronous: `insights.find(p => p.slug === params.slug) ?? throw notFound()`. No TanStack Query needed — data is bundled.
-- `head({ params, loaderData })` receives the resolved post. Absolute canonical + og:url built from `https://visiongurulabs.com/insights/${params.slug}`. `og:image` omitted per rules unless we generate a real per-post asset (we won't this pass — placeholder previews score worse than none).
+- `head({ params, loaderData })` receives the resolved post. Absolute canonical + og:url built from `https://www.visiongurulabs.com/insights/${params.slug}`. `og:image` omitted per rules unless we generate a real per-post asset (we won't this pass — placeholder previews score worse than none).
 - JSON-LD via `scripts: [{ type: "application/ld+json", children: JSON.stringify(...) }]`. Three separate script entries (Article, BreadcrumbList, FAQPage) so validators parse each independently.
 - Anchor IDs on H2/H3 come from the `body[]` blocks — stable, no runtime slugification drift between TOC links and headings.
 - Reading position / prev-next derived from index of slug in `insights` array.

@@ -19,13 +19,13 @@ export const Route = createFileRoute("/contact")({
       { name: "description", content: "Talk to a Guru. Book a discovery call to discuss custom software, AI, or digital transformation." },
       { property: "og:title", content: "Contact VisionGuru Labs" },
       { property: "og:description", content: "Book a discovery call with our senior team." },
-      { property: "og:url", content: "https://visiongurulabs.com/contact" },
+      { property: "og:url", content: "https://www.visiongurulabs.com/contact" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Contact VisionGuru Labs" },
       { name: "twitter:description", content: "Book a discovery call with our senior team." },
     ],
-    links: [{ rel: "canonical", href: "https://visiongurulabs.com/contact" }],
+    links: [{ rel: "canonical", href: "https://www.visiongurulabs.com/contact" }],
     scripts: [
       {
         type: "application/ld+json",

@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://visiongurulabs.com/"><img src="https://img.shields.io/badge/Status-Live-success?style=flat-square" alt="Status" /></a>
+  <a href="https://www.visiongurulabs.com/"><img src="https://img.shields.io/badge/Status-Live-success?style=flat-square" alt="Status" /></a>
   <img src="https://img.shields.io/badge/Stack-TanStack%20Start%20%7C%20React%2019-blue?style=flat-square" alt="Stack" />
   <img src="https://img.shields.io/badge/Styling-Tailwind%20CSS-38bdf8?style=flat-square" alt="Styling" />
   <img src="https://img.shields.io/badge/Runtime-Bun-fbf0df?style=flat-square&logo=bun" alt="Runtime" />

@@ -33,13 +33,13 @@ export const Route = createFileRoute("/careers")({
       { name: "description", content: "Open roles across engineering, AI, product, and design at VisionGuru Labs LLP." },
       { property: "og:title", content: "Careers at VisionGuru Labs" },
       { property: "og:description", content: "Senior by default. Ship in weeks. Long-term thinking." },
-      { property: "og:url", content: "https://visiongurulabs.com/careers" },
+      { property: "og:url", content: "https://www.visiongurulabs.com/careers" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Careers at VisionGuru Labs" },
       { name: "twitter:description", content: "Senior by default. Ship in weeks. Long-term thinking." },
     ],
-    links: [{ rel: "canonical", href: "https://visiongurulabs.com/careers" }],
+    links: [{ rel: "canonical", href: "https://www.visiongurulabs.com/careers" }],
     scripts: [
       {
         type: "application/ld+json",
