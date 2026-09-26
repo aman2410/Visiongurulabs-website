@@ -1,9 +1,34 @@
+import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { services, industries, navLinks } from "@/lib/site-data";
-import { Github, Linkedin, Twitter, Mail } from "lucide-react";
+import { Github, Linkedin, Twitter, Mail, CheckCircle2, AlertCircle } from "lucide-react";
 import { LogoMark } from "./SiteHeader";
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
 export function SiteFooter() {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const trimmed = email.trim();
+    if (!trimmed) {
+      setError("Please enter your email address.");
+      setSubscribed(false);
+      return;
+    }
+    if (!EMAIL_REGEX.test(trimmed)) {
+      setError("Please enter a valid email address (e.g., you@company.com).");
+      setSubscribed(false);
+      return;
+    }
+    setError(null);
+    setSubscribed(true);
+    setEmail("");
+  };
+
   return (
     <footer className="surface-dark">
       <div className="container-x py-20">
@@ -24,21 +49,49 @@ export function SiteFooter() {
             <p className="text-paper/70 text-sm max-w-sm">
               Strategic technology partners for businesses navigating AI, software, and digital transformation.
             </p>
-            <form
-              className="mt-6 flex gap-2 max-w-sm"
-              onSubmit={(e) => { e.preventDefault(); (e.currentTarget as HTMLFormElement).reset(); }}
-            >
-              <input
-                type="email"
-                required
-                placeholder="you@company.com"
-                aria-label="Email for newsletter"
-                className="flex-1 min-w-0 rounded-md bg-white/5 border border-white/15 px-3 py-2 text-sm text-paper placeholder:text-paper/40 focus:outline-none focus:ring-2 focus:ring-brand-sky"
-              />
-              <button className="rounded-md bg-brand-red px-4 py-2 text-sm font-semibold text-white hover:bg-brand-red/90 transition-colors shadow-xs">
-                Subscribe
-              </button>
-            </form>
+            <div className="mt-6 max-w-sm">
+              <form
+                noValidate
+                className="flex gap-2"
+                onSubmit={handleSubscribe}
+              >
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (error) setError(null);
+                    if (subscribed) setSubscribed(false);
+                  }}
+                  placeholder="you@company.com"
+                  aria-label="Email for newsletter"
+                  aria-invalid={Boolean(error)}
+                  className={`flex-1 min-w-0 rounded-md bg-white/5 border px-3 py-2 text-sm text-paper placeholder:text-paper/40 focus:outline-none focus:ring-2 ${
+                    error
+                      ? "border-brand-red focus:ring-brand-red"
+                      : "border-white/15 focus:ring-brand-sky"
+                  }`}
+                />
+                <button
+                  type="submit"
+                  className="rounded-md bg-brand-red px-4 py-2 text-sm font-semibold text-white hover:bg-brand-red/90 transition-colors shadow-xs"
+                >
+                  Subscribe
+                </button>
+              </form>
+              {error && (
+                <p role="alert" className="mt-2 flex items-center gap-1.5 text-xs text-brand-red">
+                  <AlertCircle className="h-3.5 w-3.5 shrink-0" />
+                  <span>{error}</span>
+                </p>
+              )}
+              {subscribed && (
+                <p role="status" className="mt-2 flex items-center gap-1.5 text-xs text-emerald-400">
+                  <CheckCircle2 className="h-3.5 w-3.5 shrink-0" />
+                  <span>Thanks for subscribing! You'll hear from us soon.</span>
+                </p>
+              )}
+            </div>
           </div>
 
           <div>
@@ -46,7 +99,13 @@ export function SiteFooter() {
             <ul className="space-y-2 text-sm">
               {services.slice(0, 6).map((s) => (
                 <li key={s.slug}>
-                  <Link to="/services" className="text-paper/60 hover:text-paper transition-colors">{s.title}</Link>
+                  <Link
+                    to="/services/$slug"
+                    params={{ slug: s.slug }}
+                    className="text-paper/60 hover:text-paper transition-colors"
+                  >
+                    {s.title}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -80,7 +139,7 @@ export function SiteFooter() {
             © {new Date().getFullYear()} VisionGuru Labs LLP. All rights reserved.
           </p>
           <div className="flex items-center gap-3">
-            <a href="mailto:hello@visionguru.labs" aria-label="Email" className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-white/5 hover:bg-white/10 text-paper/80"><Mail className="h-4 w-4" /></a>
+            <a href="mailto:info@visiongurulabs.com" aria-label="Email" className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-white/5 hover:bg-white/10 text-paper/80"><Mail className="h-4 w-4" /></a>
             <a href="#" aria-label="LinkedIn" className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-white/5 hover:bg-white/10 text-paper/80"><Linkedin className="h-4 w-4" /></a>
             <a href="#" aria-label="Twitter" className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-white/5 hover:bg-white/10 text-paper/80"><Twitter className="h-4 w-4" /></a>
             <a href="#" aria-label="GitHub" className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-white/5 hover:bg-white/10 text-paper/80"><Github className="h-4 w-4" /></a>

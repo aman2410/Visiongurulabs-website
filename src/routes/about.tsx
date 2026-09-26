@@ -40,44 +40,60 @@ function AboutPage() {
   return (
     <PageShell>
       <PageHero
-        eyebrow="About"
+        eyebrow="About VisionGuru Labs"
         title="Vision. Guru. Labs."
-        subtitle="Three ideas that shape how we work: see what's coming, guide with expertise, and engineer solutions that ship."
+        subtitle="Three ideas that shape how we work: see what's coming, guide with deep expertise, and engineer mission-critical systems that scale."
         graphic={<AboutGraphic />}
       />
       <Breadcrumbs crumbs={crumbs} />
-      <section className="py-20 lg:py-28">
-        <div className="container-x max-w-3xl space-y-8 text-lg text-slate leading-relaxed">
-          <Reveal>
-            <p>
-              VisionGuru Labs LLP was founded to close a gap we saw again and again: businesses had ambitious technology
-              agendas, but the partners available to help them were either strategy houses that couldn't ship, or dev shops
-              that couldn't strategize.
-            </p>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <p>
-              We built a firm that does both. Senior engineers who have shipped at scale sit next to product and AI operators
-              who have done the work — no juniors sold at senior rates, no hand-offs to teams you never met in the pitch.
-            </p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p>
-              We work with startups shaping category-defining products, enterprises modernizing decades-old stacks, and
-              governments building citizen services that actually work. Different scale, same standard.
-            </p>
-          </Reveal>
-        </div>
-
-        <div className="container-x mt-20 grid grid-cols-2 md:grid-cols-4 gap-8">
-          {stats.map((s) => (
-            <Reveal key={s.label}>
-              <div>
-                <div className="text-4xl font-extrabold text-brand-navy"><Counter to={s.value} suffix={s.suffix} /></div>
-                <div className="mt-1 text-sm text-muted-ink">{s.label}</div>
-              </div>
+      <section className="py-20 lg:py-28 border-b border-border/70">
+        <div className="container-x grid gap-12 lg:grid-cols-12 items-start">
+          <div className="lg:col-span-7 space-y-6 text-lg text-slate leading-relaxed">
+            <Reveal>
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-red">
+                From First Launch to Lifetime Partner
+              </span>
+              <h2 className="mt-3 text-3xl md:text-4xl font-extrabold text-ink tracking-tight text-balance">
+                Built on a Service-First Mindset. Engineered for Mission-Critical Scale.
+              </h2>
             </Reveal>
-          ))}
+            <Reveal delay={0.05}>
+              <p>
+                VisionGuru Labs LLP was founded to close a gap we saw again and again: organizations had ambitious technology
+                agendas, but the partners available to help them were either strategy houses that couldn't ship, or dev shops
+                that couldn't strategize.
+              </p>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p>
+                We built a multi-disciplinary firm that does both. Led by our founding team, principal architects, and domain Gurus,
+                we combine strategic vision with hands-on execution — closely partnering with prestigious institutions like the{" "}
+                <span className="font-semibold text-ink">Indian Army</span> and{" "}
+                <span className="font-semibold text-ink">MOIL Limited (A Govt. of India Enterprise)</span>, alongside high-growth
+                enterprises and startups worldwide.
+              </p>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <p>
+                Today, our team spans Founding Leadership, Principal Engineering & AI, Finance & Commercial Governance, and
+                People & Talent Operations — backed by specialized delivery pods big enough to execute any project across all
+                ten of our service disciplines.
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="lg:col-span-5 grid sm:grid-cols-2 gap-5">
+            {stats.map((s, idx) => (
+              <Reveal key={s.label} delay={idx * 0.05}>
+                <div className="rounded-2xl border border-border/80 bg-paper/60 p-6 h-full flex flex-col justify-between">
+                  <div className="text-4xl lg:text-5xl font-extrabold text-brand-navy">
+                    <Counter to={s.value} suffix={s.suffix} />
+                  </div>
+                  <div className="mt-3 text-sm font-semibold text-ink">{s.label}</div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
       <TeamGrid />
@@ -85,3 +101,4 @@ function AboutPage() {
     </PageShell>
   );
 }
+

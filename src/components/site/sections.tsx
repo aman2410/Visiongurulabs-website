@@ -14,8 +14,8 @@ import { Counter } from "./Counter";
 import { HeroFlow } from "./HeroFlow";
 import { CaseStudyCard } from "./CaseStudyCard";
 import {
-  services, industries, processSteps, aiCapabilities, team,
-  insights, testimonials, stats, comparison, getInsightImage,
+  services, industries, processSteps, aiCapabilities, team, teamCategories, deliveryPods,
+  insights, testimonials, stats, comparison, getInsightImage, type TeamMember,
 } from "@/lib/site-data";
 import { allCaseStudies } from "@/lib/case-studies-data";
 import { clientLogos } from "@/lib/client-logos";
@@ -1181,57 +1181,162 @@ export function AISection() {
   );
 }
 
-const memberDomains: Record<string, { category: string; tags: string[] }> = {
-  "A. Menon": {
-    category: "Product & Strategy",
-    tags: ["Product Strategy", "0-to-1 Roadmaps", "UX Architecture"],
-  },
-  "R. Iyer": {
-    category: "Engineering & Architecture",
-    tags: ["Distributed Systems", "Cloud-Native", "Zero-Downtime"],
-  },
-  "S. Kapoor": {
-    category: "AI & Machine Learning",
-    tags: ["LLM Tuning", "Autonomous Agents", "Enterprise RAG"],
-  },
-  "L. Fernandes": {
-    category: "Product & Strategy",
-    tags: ["GTM Engineering", "B2B Expansion", "Enterprise ROI"],
-  },
-};
+function FoundingMemberCard({ member }: { member: TeamMember }) {
+  return (
+    <div className="bento-glow group rounded-3xl border border-border/80 bg-background overflow-hidden hover:shadow-2xl hover:border-brand-navy/30 transition-all duration-300 grid md:grid-cols-12 h-full">
+      <div className="md:col-span-5 aspect-[4/5] md:aspect-auto relative overflow-hidden bg-slate-900 min-h-[300px]">
+        <img
+          src={member.image}
+          alt={`${member.name} — ${member.role}`}
+          style={{ objectPosition: member.imagePosition || "center 20%" }}
+          className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-65 transition-opacity" />
+        <span className="absolute top-4 left-4 text-[11px] font-bold uppercase tracking-wider bg-brand-red text-white shadow-sm px-3 py-1 rounded-full">
+          {member.role}
+        </span>
+        <div className="absolute bottom-4 left-4 right-4 md:hidden">
+          <div className="text-2xl font-extrabold text-white tracking-tight">{member.name}</div>
+        </div>
+      </div>
+
+      <div className="md:col-span-7 p-6 lg:p-8 flex flex-col justify-between">
+        <div>
+          <div className="hidden md:block">
+            <span className="text-[11px] font-mono font-bold uppercase tracking-[0.18em] text-brand-red">
+              {member.category}
+            </span>
+            <h4 className="mt-1 text-2xl lg:text-3xl font-extrabold text-ink tracking-tight">
+              {member.name}
+            </h4>
+            <p className="text-sm font-semibold text-brand-navy mt-0.5">{member.role}</p>
+          </div>
+
+          <p className="mt-4 text-sm lg:text-base text-slate leading-relaxed">{member.bio}</p>
+
+          {member.highlights && member.highlights.length > 0 && (
+            <ul className="mt-5 space-y-2">
+              {member.highlights.map((item) => (
+                <li key={item} className="flex items-start gap-2.5 text-xs lg:text-sm text-ink/90">
+                  <CheckCircle2 className="h-4 w-4 text-brand-red shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        <div className="mt-6 pt-4 border-t border-border/70">
+          <div className="text-[10px] font-bold uppercase tracking-wider text-muted-ink mb-2">
+            Core Leadership & Domain Focus
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {member.tags.map((tag) => (
+              <span
+                key={tag}
+                className="text-[11px] font-semibold rounded-md bg-brand-navy/5 text-brand-navy px-2.5 py-1 border border-brand-navy/10"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function StandardMemberCard({ member }: { member: TeamMember }) {
+  return (
+    <div className="bento-glow group rounded-3xl border border-border/80 bg-background overflow-hidden hover:shadow-xl hover:border-brand-navy/30 transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
+      <div className="aspect-[4/5] relative overflow-hidden bg-slate-900">
+        <img
+          src={member.image}
+          alt={`${member.name} — ${member.role}`}
+          style={{ objectPosition: member.imagePosition || "center 20%" }}
+          className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent opacity-80 group-hover:opacity-65 transition-opacity" />
+        <span className="absolute top-4 left-4 text-[11px] font-bold uppercase tracking-wider bg-white/95 text-brand-navy shadow-sm backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
+          {member.role}
+        </span>
+        {member.isTemplateSlot && (
+          <span className="absolute top-4 right-4 text-[10px] font-mono font-semibold uppercase tracking-wider bg-brand-navy/90 text-brand-sky px-2.5 py-1 rounded-full border border-brand-sky/30 backdrop-blur-md">
+            Practice Lead
+          </span>
+        )}
+        <div className="absolute bottom-4 left-4 right-4">
+          <div className="text-[11px] font-mono uppercase tracking-widest text-brand-sky font-semibold">
+            {member.category}
+          </div>
+          <div className="text-2xl font-extrabold text-white tracking-tight mt-0.5">{member.name}</div>
+        </div>
+      </div>
+      <div className="p-6 flex-1 flex flex-col justify-between">
+        <p className="text-sm text-slate leading-relaxed">{member.bio}</p>
+
+        {member.tags.length > 0 && (
+          <div className="mt-5 pt-4 border-t border-border/70">
+            <div className="text-[10px] font-bold uppercase tracking-wider text-muted-ink mb-2">
+              Key Specializations
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {member.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="text-[10px] font-semibold rounded-md bg-brand-navy/5 text-brand-navy px-2 py-0.5 border border-brand-navy/10"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export function TeamGrid() {
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [activeCategory, setActiveCategory] = useState<string>("All");
 
-  const categories = ["All", "AI & Machine Learning", "Engineering & Architecture", "Product & Strategy"];
+  const filterTabs = ["All", ...teamCategories.map((c) => c.id)];
 
-  const filteredTeam = team.filter((m) => {
-    if (activeCategory === "All") return true;
-    return memberDomains[m.name]?.category === activeCategory;
-  });
+  const visibleCategories =
+    activeCategory === "All"
+      ? teamCategories
+      : teamCategories.filter((c) => c.id === activeCategory);
 
   return (
     <section id="team-section" className="py-24 lg:py-32">
       <div className="container-x">
-        <div className="flex items-end justify-between gap-6 flex-wrap">
+        <div className="flex items-end justify-between gap-6 flex-wrap pb-10 border-b border-border/80">
           <Reveal>
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-red">Team</span>
-            <h2 className="mt-4 text-3xl md:text-5xl text-ink text-balance">Meet the Gurus.</h2>
-            <p className="mt-4 text-slate max-w-2xl text-base md:text-lg">A senior bench of product, engineering, AI, and growth operators.</p>
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-red">
+              Our Organization
+            </span>
+            <h2 className="mt-4 text-3xl md:text-5xl text-ink text-balance">
+              Meet the Gurus Behind the Code.
+            </h2>
+            <p className="mt-4 text-slate max-w-2xl text-base md:text-lg">
+              Organized across Founding Leadership, Principal Engineering & AI, Finance, and People Operations — backed by 40+ specialists ready to execute any project across our ten practice areas.
+            </p>
           </Reveal>
 
           {/* Interactive Category Filter Pills */}
           <Reveal delay={0.1}>
-            <div className="flex items-center gap-2 flex-wrap" role="tablist" aria-label="Team domain filters">
-              {categories.map((cat) => (
+            <div className="flex items-center gap-2 flex-wrap" role="tablist" aria-label="Team category filters">
+              {filterTabs.map((cat) => (
                 <button
                   key={cat}
                   role="tab"
                   aria-selected={activeCategory === cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                  className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
                     activeCategory === cat
-                      ? "bg-brand-navy text-white shadow-xs"
+                      ? "bg-brand-navy text-white shadow-sm"
                       : "bg-paper text-slate hover:bg-slate-200/70 border border-border/80"
                   }`}
                 >
@@ -1242,59 +1347,200 @@ export function TeamGrid() {
           </Reveal>
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          <AnimatePresence mode="popLayout">
-            {filteredTeam.map((m, i) => {
-              const meta = memberDomains[m.name];
-              return (
-                <motion.div
-                  key={m.name}
-                  layout
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.3 }}
-                  className="h-full"
-                >
-                  <div className="bento-glow group rounded-3xl border border-border/80 bg-background overflow-hidden hover:shadow-xl hover:border-brand-navy/30 transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
-                    <div className="aspect-[4/5] relative overflow-hidden bg-slate-900">
-                      <img
-                        src={m.image}
-                        alt={`${m.name} — ${m.role}`}
-                        style={{ objectPosition: m.imagePosition || "center 20%" }}
-                        className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent opacity-80 group-hover:opacity-65 transition-opacity" />
-                      <span className="absolute top-4 left-4 text-[11px] font-bold uppercase tracking-wider bg-white/95 text-brand-navy shadow-sm backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
-                        {m.role}
-                      </span>
-                      <div className="absolute bottom-4 left-4 right-4">
-                        <div className="text-2xl font-extrabold text-white tracking-tight">{m.name}</div>
+        {/* Categorized Team Sections */}
+        <div className="mt-14 space-y-20">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeCategory}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.25 }}
+              className="space-y-20"
+            >
+              {visibleCategories.map((categoryMeta) => {
+                const members = team.filter((m) => m.category === categoryMeta.id);
+                const isFounding = categoryMeta.id === "Founding Team";
+
+                return (
+                  <div key={categoryMeta.id} className="space-y-8">
+                    <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 bg-paper/70 border border-border/80 rounded-2xl p-6 lg:p-8">
+                      <div>
+                        <div className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-[0.18em] text-brand-red">
+                          <span className="h-2 w-2 rounded-full bg-brand-red" />
+                          <span>{categoryMeta.eyebrow}</span>
+                        </div>
+                        <h3 className="mt-2 text-2xl md:text-3xl font-extrabold text-ink tracking-tight">
+                          {categoryMeta.title}
+                        </h3>
+                        <p className="mt-2 text-sm md:text-base text-slate max-w-2xl">
+                          {categoryMeta.subtitle}
+                        </p>
+                      </div>
+                      <div className="shrink-0">
+                        <span className="inline-flex items-center gap-2 rounded-full bg-brand-navy text-paper px-4 py-1.5 text-xs font-mono font-bold uppercase tracking-wider">
+                          {categoryMeta.badge}
+                        </span>
                       </div>
                     </div>
-                    <div className="p-6 flex-1 flex flex-col justify-between">
-                      <p className="text-sm text-slate leading-relaxed">{m.bio}</p>
 
-                      {meta && (
-                        <div className="mt-5 pt-4 border-t border-border/70">
-                          <div className="text-[10px] font-bold uppercase tracking-wider text-muted-ink mb-2">Key Specializations</div>
-                          <div className="flex flex-wrap gap-1.5">
-                            {meta.tags.map((tag) => (
-                              <span key={tag} className="text-[10px] font-semibold rounded-md bg-brand-navy/5 text-brand-navy px-2 py-0.5 border border-brand-navy/10">
-                                {tag}
+                    {isFounding ? (
+                      <div className="grid gap-8 lg:grid-cols-2">
+                        {members.map((m) => (
+                          <FoundingMemberCard key={m.name} member={m} />
+                        ))}
+                      </div>
+                    ) : (
+                      <div
+                        className={`grid gap-6 ${
+                          members.length === 1
+                            ? "sm:grid-cols-2 lg:grid-cols-3"
+                            : "sm:grid-cols-2 lg:grid-cols-3"
+                        }`}
+                      >
+                        {members.map((m) => (
+                          <StandardMemberCard key={m.name} member={m} />
+                        ))}
+
+                        {/* Contextual capacity card for single-guru operational pillars */}
+                        {categoryMeta.id === "Finance Guru" && (
+                          <div className="rounded-3xl border border-dashed border-border bg-paper/50 p-6 lg:p-8 flex flex-col justify-between lg:col-span-2">
+                            <div>
+                              <span className="text-xs font-mono font-bold uppercase tracking-widest text-brand-navy">
+                                Commercial & Procurement Operations
                               </span>
-                            ))}
+                              <h4 className="mt-2 text-xl font-extrabold text-ink">
+                                Built for Enterprise, PSU & Global Governance
+                              </h4>
+                              <p className="mt-3 text-sm text-slate leading-relaxed">
+                                Our finance and commercial operations wing supports complex government tenders (GeM, PSU procurement), milestone-linked enterprise billing, multi-currency global contracts, and strict audit compliance.
+                              </p>
+                            </div>
+                            <div className="mt-6 grid sm:grid-cols-3 gap-4 pt-6 border-t border-border/70">
+                              <div>
+                                <div className="text-lg font-extrabold text-brand-navy">100%</div>
+                                <div className="text-xs text-slate mt-0.5">Audit & Compliance Ready</div>
+                              </div>
+                              <div>
+                                <div className="text-lg font-extrabold text-brand-navy">PSU & Govt.</div>
+                                <div className="text-xs text-slate mt-0.5">Tender & Contract Pedigree</div>
+                              </div>
+                              <div>
+                                <div className="text-lg font-extrabold text-brand-navy">Flexible</div>
+                                <div className="text-xs text-slate mt-0.5">Fixed-Scope, Pod & Retainer Models</div>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                      )}
-                    </div>
+                        )}
+
+                        {categoryMeta.id === "HR Guru" && (
+                          <div className="rounded-3xl border border-dashed border-border bg-paper/50 p-6 lg:p-8 flex flex-col justify-between lg:col-span-2">
+                            <div>
+                              <span className="text-xs font-mono font-bold uppercase tracking-widest text-brand-red">
+                                Talent, Staff Augmentation & IT Manpower Engine
+                              </span>
+                              <h4 className="mt-2 text-xl font-extrabold text-ink">
+                                Scaling Internal Pods & Client Engineering Teams
+                              </h4>
+                              <p className="mt-3 text-sm text-slate leading-relaxed">
+                                Beyond nurturing VisionGuru Labs’ internal engineering culture, our HR & Talent division powers our Staff Augmentation, IT Manpower Services, and Executive Recruitment practices — deploying vetted senior engineers within days.
+                              </p>
+                            </div>
+                            <div className="mt-6 grid sm:grid-cols-3 gap-4 pt-6 border-t border-border/70">
+                              <div>
+                                <div className="text-lg font-extrabold text-brand-navy">40+</div>
+                                <div className="text-xs text-slate mt-0.5">In-House Senior Specialists</div>
+                              </div>
+                              <div>
+                                <div className="text-lg font-extrabold text-brand-navy">&lt; 7 Days</div>
+                                <div className="text-xs text-slate mt-0.5">Staff Augmentation Deployment</div>
+                              </div>
+                              <div>
+                                <div className="text-lg font-extrabold text-brand-navy">Top 2%</div>
+                                <div className="text-xs text-slate mt-0.5">Vetted Engineering Bench</div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
-                </motion.div>
-              );
-            })}
+                );
+              })}
+            </motion.div>
           </AnimatePresence>
         </div>
+
+        {/* Full-Scale Delivery Capacity Matrix (Bee Techy inspired multi-squad scale proof) */}
+        <Reveal delay={0.15}>
+          <div className="mt-24 rounded-3xl surface-dark p-8 lg:p-12 border border-white/10 relative overflow-hidden">
+            <div className="absolute -top-24 -right-24 w-80 h-80 bg-brand-sky/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-8 border-b border-white/10">
+              <div>
+                <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-brand-orange">
+                  Full-Spectrum Delivery Capacity
+                </span>
+                <h3 className="mt-3 text-2xl md:text-4xl font-extrabold text-paper">
+                  Big Enough to Scale. Senior Enough to Care.
+                </h3>
+                <p className="mt-3 text-paper/70 max-w-2xl text-sm md:text-base">
+                  Every Guru above leads specialized delivery pods across all 10 of our service disciplines — ensuring we have the architectural depth and engineering headcount to deliver projects of any complexity.
+                </p>
+              </div>
+              <div className="shrink-0 flex items-center gap-3">
+                <Link
+                  to="/services"
+                  className="inline-flex items-center gap-2 rounded-full bg-white/10 hover:bg-white/15 text-paper px-5 py-2.5 text-xs font-bold uppercase tracking-wider transition-colors border border-white/15"
+                >
+                  Explore All 10 Services <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </div>
+
+            <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {deliveryPods.map((pod) => (
+                <div
+                  key={pod.title}
+                  className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 flex flex-col justify-between hover:border-brand-sky/40 transition-colors"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-brand-sky">
+                        {pod.count}
+                      </span>
+                      <span className="h-2 w-2 rounded-full bg-emerald-400" />
+                    </div>
+                    <h4 className="mt-2 text-lg font-extrabold text-paper">{pod.title}</h4>
+                    <ul className="mt-4 space-y-1.5">
+                      {pod.roles.map((r) => (
+                        <li key={r} className="text-xs text-paper/75 flex items-center gap-2">
+                          <span className="h-1 w-1 rounded-full bg-brand-orange" />
+                          <span>{r}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="mt-5 pt-4 border-t border-white/10">
+                    <div className="text-[10px] font-mono uppercase tracking-wider text-paper/50 mb-2">
+                      Services Powered
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {pod.servicesCovered.map((srv) => (
+                        <span
+                          key={srv}
+                          className="text-[10px] font-semibold rounded-md bg-white/10 text-paper/90 px-2 py-0.5"
+                        >
+                          {srv}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

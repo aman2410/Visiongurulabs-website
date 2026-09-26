@@ -149,52 +149,240 @@ export const aiCapabilities: AiCapability[] = [
   { title: "LLM Solutions", body: "RAG, fine-tuning, and evaluation pipelines you can trust in production.", icon: Network },
 ];
 
+export type TeamCategoryId =
+  | "Founding Team"
+  | "Engineering Team"
+  | "Finance Guru"
+  | "HR Guru";
+
+export type TeamCategoryMeta = {
+  id: TeamCategoryId;
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  badge: string;
+};
+
+export const teamCategories: TeamCategoryMeta[] = [
+  {
+    id: "Founding Team",
+    eyebrow: "Leadership & Vision",
+    title: "Founding Team",
+    subtitle:
+      "Visionary leaders who bridge boardroom strategy, sovereign-grade delivery, and hands-on product & systems architecture.",
+    badge: "Executive Leadership",
+  },
+  {
+    id: "Engineering Team",
+    eyebrow: "Architecture, AI & Delivery",
+    title: "Engineering Team",
+    subtitle:
+      "Principal architects, backend & AI gurus, and specialized engineering leads built to ship any custom software, SaaS, mobile, or AI platform at scale.",
+    badge: "40+ Engineers & Architects",
+  },
+  {
+    id: "Finance Guru",
+    eyebrow: "Commercial & Governance",
+    title: "Finance Guru",
+    subtitle:
+      "Financial stewardship, enterprise contract governance, and transparent resource planning for long-term partnerships.",
+    badge: "Finance & Governance",
+  },
+  {
+    id: "HR Guru",
+    eyebrow: "People, Culture & Talent",
+    title: "HR Guru",
+    subtitle:
+      "Building our high-ownership engineering culture while powering Staff Augmentation, IT Manpower, and Executive Recruitment solutions for clients.",
+    badge: "People & Talent Engine",
+  },
+];
+
 export type TeamMember = {
   role: string;
   name: string;
+  category: TeamCategoryId;
   bio: string;
+  tags: string[];
+  highlights?: string[];
   gradient: string;
   initials: string;
   image: string;
   imagePosition?: string;
+  isTemplateSlot?: boolean;
 };
 
 export const team: TeamMember[] = [
+  // Founding Team
   {
-    role: "Product Guru",
-    name: "A. Menon",
-    bio: "20 years shipping category-defining products for Fortune 500 and Series-A alike.",
+    name: "Aman Singh Rajawat",
+    role: "Founder & CEO",
+    category: "Founding Team",
+    bio: "Experienced in vision, strategy, and tech-savvy leadership with an attitude of service. Has closely worked with prestigious clients like the Indian Army and MOIL Limited (A Govt. of India Enterprise), guiding mission-critical digital initiatives from inception to scale.",
+    highlights: [
+      "Closely partnered with Indian Army & MOIL Limited (A Govt. of India Enterprise)",
+      "Experienced in Vision, Strategy & Tech-Savvy Leadership",
+      "Service-first mindset focused on measurable client outcomes",
+    ],
+    tags: ["Vision & Strategy", "Tech-Savvy Leadership", "Attitude of Service", "Indian Army & MOIL Partner"],
     gradient: "from-brand-navy to-brand-sky",
-    initials: "AM",
-    image: "/team/a-menon.jpg",
+    initials: "AR",
+    image: "/team/aman-singh-rajawat.jpg",
     imagePosition: "center 20%",
   },
   {
-    role: "Engineering Guru",
-    name: "R. Iyer",
-    bio: "Distributed systems veteran. Ex-principal engineer at two hyperscalers.",
+    name: "Abhay Pratap Singh",
+    role: "Co-Founder",
+    category: "Founding Team",
+    bio: "Experienced in product management, building scalable systems, and translating complex operational workflows into resilient, high-impact software products from zero to enterprise scale.",
+    highlights: [
+      "End-to-end Product Management & 0-to-1 roadmap execution",
+      "Architecting and building high-reliability enterprise systems",
+      "Aligning engineering pods with measurable business KPIs",
+    ],
+    tags: ["Product Management", "Building Systems", "Enterprise Workflows", "0-to-1 Execution"],
     gradient: "from-brand-navy-deep to-brand-navy",
-    initials: "RI",
-    image: "/team/r-iyer.jpg",
+    initials: "AS",
+    image: "/team/abhay-pratap-singh.jpg",
+    imagePosition: "center 25%",
+  },
+
+  // Engineering Team
+  {
+    name: "Vipin Singh Rajput",
+    role: "Backend Guru, AI",
+    category: "Engineering Team",
+    bio: "Specializes in high-throughput backend architectures, distributed APIs, and production-grade AI and LLM systems engineered for speed, security, and scale.",
+    tags: ["Backend Guru", "AI & LLM Systems", "Distributed APIs", "High-Concurrency Systems"],
+    gradient: "from-brand-sky to-brand-navy",
+    initials: "VR",
+    image: "/team/vipin-singh-rajput.jpg",
+    imagePosition: "center 20%",
+  },
+  {
+    name: "Ashwini Singh Chouhan",
+    role: "Principal Engineer, Architect",
+    category: "Engineering Team",
+    bio: "Principal engineer and system architect designing fault-tolerant cloud-native platforms, modular enterprise architectures, and mission-critical software infrastructure.",
+    tags: ["Principal Engineer", "System Architect", "Cloud-Native Platforms", "Enterprise Security"],
+    gradient: "from-brand-navy-deep to-brand-sky",
+    initials: "AC",
+    image: "/team/ashwini-singh-chouhan.jpg",
     imagePosition: "center 25%",
   },
   {
-    role: "AI Guru",
-    name: "S. Kapoor",
-    bio: "PhD in ML. Deploys AI where the ROI is measurable, not theatrical.",
-    gradient: "from-brand-sky to-brand-navy",
-    initials: "SK",
-    image: "/team/s-kapoor.jpg",
-    imagePosition: "center 15%",
+    name: "SaaS & Web Architecture Lead",
+    role: "Full-Stack & SaaS Guru",
+    category: "Engineering Team",
+    bio: "Leads multi-tenant SaaS product builds, modern React/TypeScript web applications, and high-performance digital platforms.",
+    tags: ["SaaS Product Development", "Website Development", "Frontend Architecture"],
+    gradient: "from-brand-navy to-brand-sky",
+    initials: "SW",
+    image: "/team/a-menon.jpg",
+    imagePosition: "center 20%",
+    isTemplateSlot: true,
   },
   {
-    role: "Growth Guru",
-    name: "L. Fernandes",
-    bio: "Bridges engineering and go-to-market so products don't ship into silence.",
+    name: "Mobile Platforms Lead",
+    role: "Mobile App Guru (iOS & Android)",
+    category: "Engineering Team",
+    bio: "Engineers native and cross-platform mobile applications with offline-first resilience, real-time synchronization, and seamless UX.",
+    tags: ["Mobile App Development", "iOS & Android", "Cross-Platform Apps"],
     gradient: "from-brand-red to-brand-navy",
-    initials: "LF",
+    initials: "MP",
+    image: "/team/r-iyer.jpg",
+    imagePosition: "center 25%",
+    isTemplateSlot: true,
+  },
+  {
+    name: "Applied AI & Automation Lead",
+    role: "AI Solutions & RAG Guru",
+    category: "Engineering Team",
+    bio: "Builds autonomous AI agents, enterprise RAG pipelines, and intelligent workflow automation backed by rigorous evaluation harnesses.",
+    tags: ["AI Consulting", "Autonomous Agents", "Enterprise RAG"],
+    gradient: "from-brand-sky to-brand-navy",
+    initials: "AA",
+    image: "/team/s-kapoor.jpg",
+    imagePosition: "center 15%",
+    isTemplateSlot: true,
+  },
+  {
+    name: "Cloud, DevOps & QA Lead",
+    role: "Platform, Security & Support Guru",
+    category: "Engineering Team",
+    bio: "Drives CI/CD automation, cloud infrastructure, zero-downtime migrations, and 24/7 mission-critical maintenance and support.",
+    tags: ["Digital Transformation", "24/7 Maintenance & Support", "Cloud & DevOps"],
+    gradient: "from-brand-navy-deep to-brand-navy",
+    initials: "CD",
     image: "/team/l-fernandes.jpg",
     imagePosition: "center 15%",
+    isTemplateSlot: true,
+  },
+
+  // Finance Guru
+  {
+    name: "Mantasha Ubaidi",
+    role: "Finance Guru",
+    category: "Finance Guru",
+    bio: "Leads financial strategy, enterprise contract governance, budgeting, and commercial operations across sovereign, enterprise, and global client engagements.",
+    tags: ["Financial Strategy", "Commercial Governance", "Enterprise Budgeting", "Audit & Compliance"],
+    gradient: "from-brand-sky to-brand-navy",
+    initials: "MU",
+    image: "/team/mantasha-ubaidi.jpg",
+    imagePosition: "center 15%",
+  },
+
+  // HR Guru
+  {
+    name: "Shubhada Londhe",
+    role: "HR Guru",
+    category: "HR Guru",
+    bio: "Champions people operations, engineering culture, and technical talent acquisition — powering both our internal squads and our Staff Augmentation, IT Manpower, and Recruitment Solutions.",
+    tags: ["People & Culture", "Staff Augmentation", "IT Manpower Services", "Recruitment Solutions"],
+    gradient: "from-brand-red to-brand-navy",
+    initials: "SL",
+    image: "/team/shubhada-londhe.jpg",
+    imagePosition: "center 15%",
+  },
+];
+
+export type DeliveryPod = {
+  title: string;
+  count: string;
+  servicesCovered: string[];
+  roles: string[];
+};
+
+export const deliveryPods: DeliveryPod[] = [
+  {
+    title: "Custom Software & Enterprise Systems Pod",
+    count: "14+ Engineers",
+    servicesCovered: ["Custom Software Development", "Digital Transformation"],
+    roles: ["Principal Architects", "Senior Backend Engineers", "Legacy Migration Specialists", "API & Integration Engineers"],
+  },
+  {
+    title: "AI, LLM & Intelligent Automation Lab",
+    count: "8+ Specialists",
+    servicesCovered: ["AI Solutions & Consulting"],
+    roles: ["AI/ML Engineers", "LLM & RAG Architects", "Agentic Workflow Builders", "Data & Evaluation Engineers"],
+  },
+  {
+    title: "SaaS, Web & Mobile Product Studio",
+    count: "12+ Builders",
+    servicesCovered: ["SaaS Product Development", "Mobile App Development", "Website Development"],
+    roles: ["Full-Stack React/Node Leads", "iOS & Android Engineers", "Product Managers", "UI/UX Design Systems Leads"],
+  },
+  {
+    title: "Cloud, DevOps, QA & 24/7 Reliability Pod",
+    count: "6+ Engineers",
+    servicesCovered: ["Maintenance & Support", "Digital Transformation"],
+    roles: ["Cloud & Kubernetes Architects", "SRE & Incident Response", "Automated QA Engineers", "Security & Compliance Auditors"],
+  },
+  {
+    title: "Talent, Staff Augmentation & IT Manpower Desk",
+    count: "Dedicated Bench",
+    servicesCovered: ["Staff Augmentation", "IT Manpower Services", "Recruitment Solutions"],
+    roles: ["Technical Recruiters", "Embedded Senior Pod Leads", "On-Demand Domain Specialists", "Executive Search Advisors"],
   },
 ];
 

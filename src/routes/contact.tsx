@@ -4,7 +4,7 @@ import { PageShell, PageHero } from "@/components/site/PageShell";
 import { ContactGraphic } from "@/components/site/hero-graphics";
 import { Reveal } from "@/components/site/Reveal";
 import { Button } from "@/components/ui/button";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, Phone, MapPin, MessageCircle, Send } from "lucide-react";
 import { Breadcrumbs, breadcrumbJsonLd } from "@/components/site/Breadcrumbs";
 
 const crumbs = [
@@ -98,13 +98,54 @@ function ContactPage() {
           </div>
           <div className="lg:col-span-2 space-y-6">
             <Reveal delay={0.05}>
-              <InfoCard icon={<Mail className="h-5 w-5" />} title="Email" body="hello@visionguru.labs" />
+              <InfoCard
+                icon={<Mail className="h-5 w-5" />}
+                title="Email"
+                body={
+                  <div className="flex flex-col gap-1">
+                    <a href="mailto:info@visiongurulabs.com" className="hover:text-ink transition-colors">
+                      info@visiongurulabs.com
+                    </a>
+                    <a href="mailto:ceo@visiongurulabs.com" className="hover:text-ink transition-colors">
+                      ceo@visiongurulabs.com
+                    </a>
+                  </div>
+                }
+              />
             </Reveal>
             <Reveal delay={0.1}>
-              <InfoCard icon={<Phone className="h-5 w-5" />} title="Phone" body="+91 80 4567 8900" />
+              <InfoCard
+                icon={<Phone className="h-5 w-5" />}
+                title="Phone"
+                body={
+                  <a href="tel:+917879657282" className="hover:text-ink transition-colors">
+                    +91 78796 57282
+                  </a>
+                }
+              />
             </Reveal>
             <Reveal delay={0.15}>
-              <InfoCard icon={<MapPin className="h-5 w-5" />} title="Office" body={<>Bengaluru, India<br />Mumbai · Remote-first</>} />
+              <InfoCard
+                icon={<MessageCircle className="h-5 w-5" />}
+                title="WhatsApp"
+                body={
+                  <a
+                    href="https://wa.me/917879657282"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-ink transition-colors"
+                  >
+                    +91 78796 57282
+                  </a>
+                }
+              />
+            </Reveal>
+            <Reveal delay={0.2}>
+              <InfoCard
+                icon={<MapPin className="h-5 w-5" />}
+                title="Address"
+                body="H No. R-32, MP Nagar, Zone-1, 462011, Bhopal, M.P."
+              />
             </Reveal>
           </div>
         </div>
